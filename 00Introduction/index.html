@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bayesian Clinical Trials</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="index_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Bayesian Clinical Trials',
+                        subtitle: 'Course introduction',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets\css\ioslides.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Instructors</h2></hgroup><article  id="instructors">
+
+<p><a imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img src="images/ibaldi.jpg" alt="ibaldi" height="150"></a> Ileana Baldi<br /> Assistant Professor of Biostatistics<br /> Dept. of Cardiac, Thoracic and Vascular Sciences<br /> University of Padova</p>
+
+<p><br></br></p>
+
+<a imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-right: 1em; margin-left:1em "><img src="images/pberk.jpg" alt="pberk" height="150"></a>
+
+<div style="text-align: right;">
+<p>Paola Berchialla <br /> Assistant Professor of Biostatistics<br /> Dept of Clinical and Biological Sciences <br /> University of Torino</p></div>
+
+</article></slide><slide class=''><hgroup><h2>Outline - part I</h2></hgroup><article  id="outline---part-i">
+
+<p>9.15-9.45 <span style="padding-left:30px">
+<strong>Brief introduction to phase I and phase IIB trials</strong> </span><br /> <span style="padding-left:150px">
+both single-stage and two-stage with proportion as outcome.</span></p>
+
+<p>9.45-10.30 <span style="padding-left:15px">
+<strong>Dose-finding phase I and the CRM method</strong></span></p>
+
+<p>10.30-11.00 <strong>Real data case study</strong></p>
+
+<p>11.15-12.00 <strong>An introduction to the Beta-Binomial model</strong> <br /> <span style="padding-left:150px">
+ binomial likelihood, beta prior, conjugacy, posterior density and </span> <span style="padding-left:150px">
+posterior predictive distribution</span></p>
+
+<p>12.00-12.30 <em>Hands-on</em> <strong>example</strong> <br/> <span style="padding-left:150px">
+informative vs. non-informative beta priors </span></p>
+
+</article></slide><slide class=''><hgroup><h2>Outline - part II</h2></hgroup><article  id="outline---part-ii">
+
+<p>13.30-14.30 <strong>Bayesian Sample Size Determination for Binomial Proportions</strong> <span style="padding-left:150px">
+ choose a sample size that allows one to estimate the accuracy to</span><br/> <span style="padding-left:150px">
+within a desired credible interval width (ACC, ALC, WOC)</span><br></br> <span style="padding-left:150px">
+ choose a sample size n for which the probability of a <em>successful</em></span><br /> <span style="padding-left:150px">
+ <em>trial</em> is large enough, in the sense that it exceeds a specified threshold</span><br /> <span style="padding-left:150px">
+ (single threshold designs and extensions)</span></p>
+
+<p>14.30-15.00 <strong>Case study</strong> to compare ACC, ALC, WOC</p>
+
+<p>15.00-15.30 <strong>Case study</strong> to compare two-stage phase II with different priors<br/> <span style="padding-left:150px">
+ vs. Simon</span></p>
+
+<p>15.45-16.30 <strong>Insight into building priors</strong></p>
+
+<p>16.30-17.30 &quot;Our&quot; design???</p>
+
+</article></slide><slide class=''><hgroup><h2>Pre-requisites</h2></hgroup><article  id="pre-requisites">
+
+<ul>
+<li>There are no formal pre-requisites</li>
+<li>Analysis will be performed in the R programming language: <a href='http://www.r-project.org/' title=''><a href='http://www.r-project.org/' title=''>http://www.r-project.org/</a></a></li>
+<li>Rstudio <a href='http://www.rstudio.com/products/rstudio/' title=''><a href='http://www.rstudio.com/products/rstudio/' title=''>http://www.rstudio.com/products/rstudio/</a></a> is recommended</li>
+<li><p>The following R package will be used in class:</p>
+
+<ul>
+<li>SampleSizeProportions</li>
+<li>LearnBayes</li>
+<li>shiny</li>
+<li>BRugs</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Getting the slides</h2></hgroup><article  id="getting-the-slides">
+
+<ul>
+<li>The slides for this course were created with Rmarkdown: <a href='http://rmarkdown.rstudio.com/' title=''><a href='http://rmarkdown.rstudio.com/' title=''>http://rmarkdown.rstudio.com/</a></a>.</li>
+<li>They are available from <a href='GItHUB%20SITE' title=''>GItHUB SITE</a>.</li>
+<li><p>To re-compile the slides:</p>
+
+<ul>
+<li>Download the directory containing the lecture from Github</li>
+<li>In R open the .Rmd file and set the working directory to the lecture directory</li>
+<li>Click the <em>KnitHTML</em> button on Rstudio or run the following commands:</li>
+</ul></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>library(rmarkdown) 
+render(&quot;index.Rmd&quot;)</pre></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "index_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
