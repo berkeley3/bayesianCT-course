@@ -1,13 +1,14 @@
 ---
 title: "Bayesian Clinical Trials"
-subtitle: "Course introduction"
+subtitle: Course introduction
 output:
+  beamer_presentation: default
   ioslides_presentation:
-    logo: assets/img/mylogos2.png
     css: assets/css/ioslides.css
-    widescreen: yes   
+    logo: assets/img/mylogos2.png
     mathjax: local
-    self_contained: false
+    self_contained: no
+    widescreen: yes
 ---
 
 ## Instructors
@@ -86,7 +87,7 @@ Paola Berchialla <br />
 ## Getting the slides
 
 * The slides for this course were created with Rmarkdown: [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/). 
-* They are available from [GItHUB SITE](GItHUB SITE).
+* They are available from [https://github.com/berkeley3/bayesianCT-course](https://github.com/berkeley3/bayesianCT-course).
 * To re-compile the slides:
 
     + Download the directory containing the lecture from Github
