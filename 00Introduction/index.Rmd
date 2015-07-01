@@ -2,13 +2,14 @@
 title: "Bayesian Clinical Trials"
 subtitle: Course introduction
 output:
-  beamer_presentation: default
   ioslides_presentation:
     css: assets/css/ioslides.css
-    logo: assets/img/mylogos2.png
+    logo: assets/img/logos3.png
     mathjax: local
     self_contained: no
     widescreen: yes
+  beamer_presentation: default
+  slidy_presentation: default
 ---
 
 ## Instructors
@@ -33,7 +34,7 @@ Paola Berchialla <br />
 
 
 ## Outline - part I
-9.15-9.45	<span style="padding-left:30px">**Brief introduction to phase I and phase IIB trials** </span><br />
+9.15-9.45	<span style="padding-left:30px">**Brief introduction to phase I and phase IIA trials** </span><br />
 <span style="padding-left:150px">both single-stage and two-stage with proportion as outcome.</span>
               
 
