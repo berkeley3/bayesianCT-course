@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bayesian Clinical Trials</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="index_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Bayesian Clinical Trials',
+                        subtitle: 'Dose Finding CRM',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets\css\ioslides.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Phase I study</h2></hgroup><article  id="phase-i-study">
+
+<p>Goals:</p>
+
+<ol>
+<li>Determine a safe dose for further clinical studied</li>
+<li>Study pharmacokinetics of the drug</li>
+</ol>
+
+</article></slide><slide class=''><hgroup><h2>Toxicity Dose-Response Curve</h2></hgroup><article  id="toxicity-dose-response-curve">
+
+<p>We can ordinarily assume that the probability of a dose-limiting adverse event increases <span style="color:red">
+monotonically</span> with dose</p>
+
+<p>In that circumstances, the <span style="color:red">
+Maximum Tolerated Dose (MTD)</span> is the dose associated with the specified probability of a <span style="color:red">
+dose-limiting toxicity (DLT)</span></p>
+
+</article></slide><slide class=''><hgroup><h2>Diagram of Dose Response Relationship</h2></hgroup><article  id="diagram-of-dose-response-relationship">
+
+<center>
+
+<img src="images/Dose-Response.png" height="300px"/>
+
+</center>
+
+<p><a href='https://www.osha.gov/pls/oshaweb/owadisp.show_document?p_id=770&amp;p_table=preambles' title=''>Health Effects Discussion and Determination of Final PEL, OSHA</a></p>
+
+</article></slide><slide class=''><hgroup><h2>Diagram of Dose Response Relationship</h2></hgroup><article  id="diagram-of-dose-response-relationship-1">
+
+<center>
+
+<img src="images/Dose-Response_2.png" height="300px"/>
+
+</center>
+
+<p><a href='https://www.osha.gov/pls/oshaweb/owadisp.show_document?p_id=770&amp;p_table=preambles' title=''>Health Effects Discussion and Determination of Final PEL, OSHA</a></p>
+
+</article></slide><slide class=''><hgroup><h2>Rules based models</h2></hgroup><article  id="rules-based-models">
+
+<ul>
+<li>Make no assumptions about the form of the dose-toxicity curve</li>
+<li>Often called &quot;up-and-down&quot; designs because they allow dose escalation and de-escalation</li>
+<li>The dose is increased or decreased depending on the occurrence of dose-limiting toxicities (DLT)</li>
+<li>More than 90% or Phase I trials in cancer are rule-based (<em>J Natl Cancer Inst 2009; 101:708-720</em>)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Conventional 3+3 Design</h2></hgroup><article  id="conventional-33-design">
+
+<center>
+
+<img src="images/Conventional3+3.png" height="450px"/>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>Model Based Design</h2></hgroup><article  id="model-based-design">
+
+<ul>
+<li>Specify a mathematical model for dose-response curve</li>
+<li>Choose the initial dose based on expert opinion</li>
+<li>After each dose, re-estimate the model and choose the next dose as the dose estimated to have the specified probability of a DLT, eg. 0.33</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Model Based Design</h2></hgroup><article  id="model-based-design-1">
+
+<p>One popular model is the <span style="color:red">
+logistic model</span>, which has only two parameters, an intercept and a slope</p>
+
+<center>
+
+<img src="images/logisticRegression.gif" height="300px"/>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>Comparing Rule and Model-Based Design</h2></hgroup><article  id="comparing-rule-and-model-based-design">
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Rule Based Design</th>
+<th align="left">Model Based Designs</th>
+</tr>
+<tr class="odd">
+<td align="left">Easy to describe</td>
+<td align="left">Difficult to describe</td>
+</tr>
+<tr class="even">
+<td align="left">Easy to implement</td>
+<td align="left">Require statistical support</td>
+</tr>
+<tr class="odd">
+<td align="left">Possibly inefficient</td>
+<td align="left">May be more efficient</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Outcome adaptive statistical models</h2></hgroup><article  id="outcome-adaptive-statistical-models">
+
+<ul>
+<li>Continual Reassessment method</li>
+<li>Bayesian Logistic Regression</li>
+</ul>
+
+<p>They incorporate uncertainty regarding patient outcome by using Bayesian probability models:</p>
+
+<ul>
+<li>learning from accruing data</li>
+<li>choosing doses for successive patient cohorts</li>
+<li>describing various probabilities graphically</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Illustrative Trial: Renal Cell Carcinoma (RCC) Trial</h2></hgroup><article  id="illustrative-trial-renal-cell-carcinoma-rcc-trial">
+
+<ul>
+<li><p>Patients with renal cell carcinoma (RCC) that was progressive after previous treatment with interferon were eligible.</p></li>
+<li>Treatment consisted of fixed doses of 5-Fluorouracil (5-FU) and interferon, plus one of six doses of gemcitabine (GEM):
+
+<ul>
+<li>100, 200, 300, 400, 500 or 600mg/m2.</li>
+</ul></li>
+<li><p>Toxicity was defined as grade 3 or 4 diarrhea, mucositis, or hematologic toxicity.</p></li>
+<li><p>A total of 36 patients were treated in cohorts of size 3, with the first cohort given 200mg/m2 of GEM.</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Dose Toxicity Probability Models</h2></hgroup><article  id="dose-toxicity-probability-models">
+
+<p>The probability of toxicity \(P_{TOX}\) depends on the dose given to the patient \[
+P_{TOX}(100) &lt; P_{TOX}(200) &lt; \ldots &lt; P_{TOX}(600)
+\]</p>
+
+<p><strong>underlying assumption:</strong> a larger dose necessarily implies a greater risk of toxicity, e.g \(P_{TOX}(dose)\) must increase with dose</p>
+
+<div class="columns-2">
+<p><img src="images/BLR.png" height="250px"/></p>
+
+<p><br><br></p>
+
+<p>Three possible dose-toxicity probability curves described by the logistic regression model</p></div>
+
+</article></slide><slide class=''><hgroup><h2>Dose Toxicity Probability Models</h2></hgroup><article  id="dose-toxicity-probability-models-1">
+
+<p>A model based method requires specifying a fixed \(P_{TOX}\) value as <em>target</em> for the dose-finding problem. In the RCC trial, the target is 0.25:</p>
+
+<ul>
+<li>it is clinically acceptable if on average 1 patient in 4 receiving the treatment at the MTD experiences toxicity
+
+<ul>
+<li>targets in the range 0.10 to 0.40 are usually specified (the particular value varies depending on the definition of toxicity, the disease, the trial&#39;s entry criteria)</li>
+</ul></li>
+</ul>
+
+<center>
+
+<img src="images/BLR.png" height="200px"/>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>Bayesian Logistic Regression</h2></hgroup><article  id="bayesian-logistic-regression">
+
+<p>The Bayesian regression model has linear term \[
+\eta(x,\theta) = \mu +\beta x, \qquad \mu\in R, \beta&gt;0
+\] which is linked to the probability toxicity \(\pi(d,\theta)\) by a suitable link function \[
+\pi(d,\theta) = g^{-1}\{\eta (x_j, \theta)\}, \qquad g(\pi) = \log\frac{\pi}{1-\pi}
+\]</p>
+
+<p>To determine the prior on \((\mu, \beta)\) elicited prior means \(\pi(d_1,\theta)\) and \(\pi(d_2,\theta)\) at two distinct doses \(d_1\) and \(d_2\) are used to determine priors on \((\mu, \beta)\).</p>
+
+</article></slide><slide class=''><hgroup><h2>Bayesian Logistic Regression: simplified prior elicitation approach</h2></hgroup><article  id="bayesian-logistic-regression-simplified-prior-elicitation-approach">
+
+<p>A simpler approach can be adopted:</p>
+
+<ul>
+<li>\(\mu\) and \(\beta\) are assumed independent normal</li>
+<li>solves for the means of \(\mu\) and \(\beta\) based on elicited \(\pi(d_1,\theta)\) and \(\pi(d_2,\theta)\)</li>
+<li>choose their variances to obtain a vague prior</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Bayesian Logistic Regression: simplified prior elicitation approach</h2></hgroup><article  id="bayesian-logistic-regression-simplified-prior-elicitation-approach-1">
+
+<p>\[
+\pi(d_1,\theta) = g^{-1}\{\eta (x_j, \theta)\} = g^{-1}(\mu + 0.65\beta) = 0.25 
+\]</p>
+
+<p>\[
+\pi(d_2,\theta) = g^{-1}\{\eta (x_j, \theta)\} = g^{-1}(\mu + 1.57\beta) = 0.75 
+\]</p>
+
+<p>given doses \(d_1 &lt; d_2 &lt; \ldots &lt; d_k\), \(x_j\) is the standardized dose \(x_j = \log(d_j)-\frac{\log(d_1)+\ldots +\log(d_k)}{k}\). Thus \(d_1=500, x_1 = 0.65\) and \(d_2 = 500, x_2 = 1.57\)</p>
+
+<p>Solving (1) and (2): \[
+E(\mu)=-0.1313, \qquad E(\beta)=2.3980
+\] We chose \(\sigma_\mu = \sigma_\beta = 2\)</p>
+
+</article></slide><slide class=''><hgroup><h2>Example</h2></hgroup><article  id="example">
+
+<center>
+
+<img src="images/BLR_example.png" width=800 height=300>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>RCC Trial</h2></hgroup><article  id="rcc-trial">
+
+<ul>
+<li><p>Patients with renal cell carcinoma (RCC) that was progressive after previous treatment with interferon were eligible.</p></li>
+<li>Treatment consisted of fixed doses of 5-Fluorouracil (5-FU) and interferon, plus one of six doses of gemcitabine (GEM):
+
+<ul>
+<li>100, 200, 300, 400, 500 or 600mg/m2.</li>
+</ul></li>
+<li><p>Toxicity was defined as grade 3 or 4 diarrhea, mucositis, or hematologic toxicity.</p></li>
+<li><p>A total of 36 patients were treated in cohorts of size 3, with the first cohort given 200mg/m2 of GEM.</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Continual Reassessment Method (CRM)</h2></hgroup><article  id="continual-reassessment-method-crm">
+
+<ul>
+<li>Model-based Bayesian method introduced by J. O&#39;Quigley (<em>Biometrics</em> 1990)</li>
+<li>Parametric model for dose-response relationship and fixed target for \(P_{TOX}\)</li>
+<li>It requires a skeleton of fixed probabilities corresponding to the dose levels</li>
+<li>It requires prior information</li>
+<li>The study begins by dosing the first patient at the <em>best</em> dose</li>
+<li>The analysis is updated given the data obtained</li>
+<li>For the next patient pick the &quot;best&quot; dose and continue</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>CRM: single parameter working model</h2></hgroup><article  id="crm-single-parameter-working-model">
+
+<p>\[
+P(d, \alpha) = \rm{probability\  of \ a \ toxicity\ at\ dose\ d}
+\]</p>
+
+<p>The following working models were suggested in (Biometrics 1990)</p>
+
+<ul>
+<li>1- parameter logistic: \(P(d,\theta) = \frac{\exp(-3+\theta d)}{1+ \exp(-3+\theta d)}\)</li>
+<li>power: \(P(d,\theta) = d^{\exp(\theta)}\)</li>
+<li>hyperbolic tangent: \(P(d,\theta) = \left(\frac{\exp(d)}{\exp(d)+\exp(-d)}\right)^\theta\)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>CRM: Prior information</h2></hgroup><article  id="crm-prior-information">
+
+<p>\(\alpha\) is the parameter that is going to be updated during the trial</p>
+
+<ul>
+<li>exponential prior \(\pi(\theta) =\exp(-\theta)\) with mean 1</li>
+<li>normal prior \(\pi(\theta)=Normal(0,var(\theta))\) with \(1\leq var(\theta) \leq 10\)</li>
+</ul>
+
+<p>Given the data for doses \(x_i\) and outcomes \(y_i\), the likelihood is</p>
+
+<p>\[
+f(x\vert\theta) = \prod_i P(x_i,\theta)^{y_i}(1-P(x_i,\theta))^{1-y_i}
+\]</p>
+
+<p>and the posterior is</p>
+
+<p>\[
+\pi(\theta\vert x) = \frac{f(x\vert\theta)\pi(\theta)}{\int_0^\infty f(x\vert\theta)\pi(\theta)d\theta}
+\] computed by numerical integration or MCMC methods</p>
+
+</article></slide><slide class=''><hgroup><h2>Example: RCC trial</h2></hgroup><article  id="example-rcc-trial">
+
+<ul>
+<li>The prior probabilities for each toxicity (<em>skeleton</em>) for 6 dose levels need to be specified</li>
+</ul>
+
+<table class = 'rmdtable'>
+<tr class="odd">
+<td align="left">doses</td>
+<td align="left">\(d_1=100\)</td>
+<td align="left">\(d_2=200\)</td>
+<td align="left">\(d_3=300\)</td>
+<td align="left">\(d_4=400\)</td>
+<td align="left">\(d_5=500\)</td>
+<td align="left">\(d_6=600\)</td>
+</tr>
+<tr class="even">
+<td align="left">probabilities</td>
+<td align="left">0.15</td>
+<td align="left">0.25</td>
+<td align="left">0.40</td>
+<td align="left">0.60</td>
+<td align="left">0.75</td>
+<td align="left">0.85</td>
+</tr>
+</table>
+
+<p><br></br> The skeleton is fixed throughout the trial and dictates the shape of the curve</p>
+
+<ul>
+<li>Target (TTL) is specified at 0.25</li>
+<li>Default working model is exponential</li>
+<li>Default prior is Normal(0, 1.8)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>CRM</h2></hgroup><article  id="crm">
+
+<center>
+
+<img src="images/CRM.png", height=400>
+
+</center>
+
+</article></slide><slide class=''><hgroup><h2>CRM</h2></hgroup><article  id="crm-1">
+
+<p>Under either model:</p>
+
+<ul>
+<li>denoting \(Y_i=1\) if the ith patient suffers toxicity</li>
+<li>denoting \(Y_i=0\) if not,</li>
+<li>denoting \(d(i)\) that patient&#39;s dose</li>
+</ul>
+
+<p>the likelihood for n patients is</p>
+
+<p>\[
+\prod_{i=1}^n \pi(d_i,\theta)^{Y_i}\times (1-\pi(d_i,\theta ))^{(1-Y_i)}
+\]</p>
+
+<p>The posterior of \(\theta\) and each posterior mean \(E(\pi(d_j, \theta)|data)\) may be computed using either numerical integration or Markov chain Monte Carlo methods.</p>
+
+</article></slide><slide class=''><hgroup><h2>CRM stopping rules</h2></hgroup><article  id="crm-stopping-rules">
+
+<p>The additional rule that stops the trial if the lowest dose is excessively toxic is given formally by \[
+Prob\{\pi(d_1, \theta) &gt; \pi^*|data\} &gt; p_U
+\] where \(p^*\) is the fixed target and \(p_U\) is a fixed upper probability cut-off, usually in the range 0.95 to 0.99.</p>
+
+</article></slide><slide class=''><hgroup><h2>Getting the slides</h2></hgroup><article  id="getting-the-slides">
+
+<ul>
+<li>The slides for this course were created with Rmarkdown: <a href='http://rmarkdown.rstudio.com/' title=''><a href='http://rmarkdown.rstudio.com/' title=''>http://rmarkdown.rstudio.com/</a></a>.</li>
+<li>They are available from <a href='https://github.com/berkeley3/bayesianCT-course' title=''><a href='https://github.com/berkeley3/bayesianCT-course' title=''>https://github.com/berkeley3/bayesianCT-course</a></a>.</li>
+<li><p>To re-compile the slides:</p>
+
+<ul>
+<li>Download the directory containing the lecture from Github</li>
+<li>In R open the .Rmd file and set the working directory to the lecture directory</li>
+<li>Click the <em>KnitHTML</em> button on Rstudio or run the following commands:</li>
+</ul></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>library(rmarkdown) 
+render(&quot;index.Rmd&quot;)</pre></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "index_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

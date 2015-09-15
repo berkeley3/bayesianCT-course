@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bayesian Clinical Trials</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="index_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Bayesian Clinical Trials',
+                        subtitle: 'Brief introduction to phase I and phase IIA trials',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets\css\ioslides.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Phases of drug development process</h2></hgroup><article  id="phases-of-drug-development-process">
+
+<center>
+
+<img src="images/Figure1b.png" width=900 height="450">
+
+</center>
+
+<p><a href='http://www.fda.org' title=''>FDA</a></p>
+
+</article></slide><slide class=''><hgroup><h2>Phase I study</h2></hgroup><article  id="phase-i-study">
+
+<ul>
+<li><p>Goal: the first step in evaluating a potential new agent is to determine a dose having an acceptable level of toxicity.</p></li>
+<li>Key elements:
+
+<ul>
+<li>the starting dose \(d_{start}\)</li>
+<li>the dose-limiting toxicity (DLT)</li>
+<li>the target toxicity level (TTL)</li>
+<li>a dose escalation scheme consisting of
+
+<ul>
+<li>a dose increment</li>
+<li>a dose assignment</li>
+<li>a cohort size</li>
+</ul></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<ul>
+<li><p>Dose levels have historically been chosen according to some variation of a Fibonacci sequence. A Fibonacci sequence is a sequence of numbers where each number is the sum of the two previous numbers in the sequence; an example is {1,1,2,3,5,8,&#8230;}.</p></li>
+<li><p>Based on dose assignment, phase I trials can be classified into rule-based methods and model-based methods</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Rule based designs</h2></hgroup><article  id="rule-based-designs">
+
+<ul>
+<li>Traditional 3+3 design
+
+<ul>
+<li>If none of the first 3 patients experiences a DLT at \(d_{start}\) \(=&gt;\) 3 more patients will be treated at the next higher dose level (<em>escalation</em>).</li>
+<li>If 1 of the first 3 patients experiences a DLT \(=&gt;\) 3 more patients will be treated at the same dose level.</li>
+<li>If 2 or 3 patients out of 3 experience a DLT \(=&gt;\) 3 more patients will be treated at the next lower dose level (<em>de-escalation</em>).</li>
+<li>The dose escalation/de-escalation continues but stops as soon as at least 2 patients experience DLTs, among a total of up to 6 patients (i.e. probability of DLT at the dose¸ 33%).</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Rule based designs</h2></hgroup><article  id="rule-based-designs-1">
+
+<p>Example</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Cohort</th>
+<th align="left">Dose 1</th>
+<th align="left">Dose 2</th>
+<th align="left"><em>Dose 3</em></th>
+<th align="left">Dose 4</th>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">0/3</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left"></td>
+<td align="left">1/3</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left"></td>
+<td align="left">0/3</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1/3</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">5</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">1/3</td>
+<td align="left"></td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Rule based designs</h2></hgroup><article  id="rule-based-designs-2">
+
+<ul>
+<li>Alternative statistical approaches are needed to make a better use of the complex data generated by phase I trials. Their applications require a close collaboration between all actors of early phase clinical trials (Paoletti et al, 2015).</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Model based</h2></hgroup><article  id="model-based">
+
+<ul>
+<li>Model-based methods for finding the MTD assume that there is a monotonic dose-toxicity relationship. In this approach, a dose-toxicity curve as well as the TTL are explicitly defined.</li>
+<li>The goal for the phase I clinical trial is, through treating patients in a dose escalation fashion, to seek a suitable quantile of the dose-toxicity curve; specifically,a dose that will induce a probability of DLT at a specified TTL.</li>
+<li>This method is most conveniently carried out under the Bayesian framework. Simple one- or two- parameter parametric models are often used to characterize the dose-toxicity relationship, with the Bayesian posterior distribution used to estimate the parameters.</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Model based</h2></hgroup><article  id="model-based-1">
+
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" title="" alt="" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Model based</h2></hgroup><article  id="model-based-2">
+
+<ul>
+<li><p>The continual reassessment method (CRM) seems to have been the first Bayesian model-based phase I design introduced in the literature (O&#39;Quigley et al, 1990).</p></li>
+<li><p>Many modifications were proposed to overcome its greatest weakness - i.e. its potential for exposing patients to overly toxic doses if the first few patient responses are atypical or the model is misspecified - and its limitations such as the use of a single binary endpoint. See Berry et al (2011) for a review.</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Phase II studies</h2></hgroup><article  id="phase-ii-studies">
+
+<p>After the toxicity profile and/or the MTD for a treatment has been investigated, phase II studies are conducted at the MTD or an optimal biological dose estimated from phase I.</p>
+
+<ul>
+<li>Goal: to examine whether a drug has sufficient efficacy to warrant further developmentand and to refine knowledge of its toxicity profile.
+
+<ul>
+<li>Phase IIA is single arm</li>
+<li>Phase IIB is multi-arm</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Phase IIA designs</h2></hgroup><article  id="phase-iia-designs">
+
+<p>To provide an initial efficacy assessment, a phase IIA trial is often designed as a single-arm,open-label study that requires treating 40 to 100 patients in a multistage setting.</p>
+
+<p>The primary endpoint is often a binary endpoint of response/no response or success/failure.</p>
+
+<p>Multi-stage designs are useful here for early stopping due to lack of efficacy should the interim data indicate that the study drug is inefficacious.</p>
+
+</article></slide><slide class=''><hgroup><h2>Phase IIA designs</h2></hgroup><article  id="phase-iia-designs-1">
+
+<ul>
+<li>Simon (1989) optimal and minimax designs:
+
+<ul>
+<li>Optimal design minimize the expected sample size under the null hypothesis; minimax design can be constructed that minimizes the maximum trial sample size.<br/></li>
+<li>After the inclusion of a pre-determined number of patients, \(n_{1}\), the trial is paused, and the response rate is evaluated.</li>
+<li>If a pre-specified minimal response rate, \(r_{1}/n_{1}\) has not been achieved, the treatment is not worth pursuing and the trial is ended.</li>
+<li>Otherwise, enrollment continues until a pre-determined number \(n\) of additional patients are accrued. The drug will be declared effective or ineffective depending on the achievement of an overall response rate\(r/n\).</li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Phase IIB designs</h2></hgroup><article  id="phase-iib-designs">
+
+<p>After passing the initial efficacy assessment of a new agent in a phase IIA study, the subsequent phase IIB trial is often a randomized, multi-arm study.</p>
+
+<p>Phase IIB trials are by definition smaller and less definitive than phase III trials.</p>
+
+<p>They use earlier endpoints, such as disease-free survival, rather than overall survival in order to shorten study duration.</p>
+
+<p>They also often have larger Type I and Type II error rates than their phase III counterparts.</p>
+
+<p>They do not yield sufficient statistical power for a head-to-head comparison between the treatment arms.</p>
+
+</article></slide><slide class=''><hgroup><h2>References</h2></hgroup><article  id="references">
+
+<ul>
+<li><p>Paoletti X, Ezzalfani M, Le Tourneau C. Statistical controversies in clinical research: requiem for the 3 + 3 design for phase I trials. Ann Oncol 2015 Jun 18. pii: mdv266.</p></li>
+<li><p>O&#39;Quigley J, Pepe M, Fisher L. Continual reassessment method: a practical design for phase I clinical trials in cancer. Biometrics 1990; 46: 33-48.</p></li>
+<li><p>Simon R. Optimal two-stage designs for phase II clinical trials. Control Clin Trials 1989; 10: 1-10.</p></li>
+<li><p>Berry S.M., Carlin B.P., Lee J.J. , Muller P. Bayesian Adaptive Methods for Clinical Trials. 2011 Chapman &amp; Hall.</p></li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "index_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

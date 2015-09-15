@@ -65,10 +65,7 @@ Paola Berchialla <br />
 15.45-16.45 **Bayesian Sample Size Determination for Binomial Proportions**
     <span style="padding-left:150px">	- choose a sample size that allows one to estimate the accuracy to</span><br/>
     <span style="padding-left:150px">within a desired credible interval width (ACC, ALC, WOC)</span></br>
-    <span style="padding-left:150px"> - choose a sample size n for which the probability of a *successful*</span><br /> 
-    <span style="padding-left:150px"> *trial* is large enough, in the sense that it exceeds a specified threshold</span><br /> 
-    <span style="padding-left:150px"> (single threshold designs and extensions)</span>
-
+ 
 16.45-17.30 **Case study** to compare ACC, ALC, WOC 
 
 

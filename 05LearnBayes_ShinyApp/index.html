@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bayesian Clinical Trials</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="index_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Bayesian Clinical Trials',
+                        subtitle: 'Informative vs. non-informative beta priors',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets\css\ioslides.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Construction prior Beta</h2></hgroup><article  id="construction-prior-beta">
+
+</article></slide><slide class=''><hgroup><h2>Updatindg with Data</h2></hgroup><article  id="updatindg-with-data">
+
+<pre class = 'prettyprint lang-r'>library(LearnBayes)</pre>
+
+<p>Suppose we are interested in the response \(p\) of a drug.</p>
+
+<ul>
+<li><p>The function <strong>bayes.select</strong> allow for specifying a beta prior based on knowledge of two prior quantiles.</p></li>
+<li><p>Suppose the prior median for the response rate is 0.2 and the 75th percentile is 0.3.</p></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+print(beta.prior)</pre>
+
+<pre >## [1] 2.04 7.19</pre>
+
+<p>A beta(2.04, 7.19) prior matches this prior information</p>
+
+</article></slide><slide class=''><hgroup><h2>Updating with data</h2></hgroup><article  id="updating-with-data">
+
+<ul>
+<li>Next, suppose to observe for 3 successive patients no adverse events
+
+<ul>
+<li>3 successes and 0 failures</li>
+</ul></li>
+</ul>
+
+<p>The posterior distribution is&#8230;</p>
+
+</article></slide><slide class=''><hgroup><h2>Triplot</h2></hgroup><article  id="triplot">
+
+<p>The triplot function shows the prior, likelihood, and posterior on the same display</p>
+
+<pre class = 'prettyprint lang-r'>beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+triplot(beta.prior, c(3,0))</pre>
+
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" title="" alt="" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Inference by sampling from the posterior</h2></hgroup><article  id="inference-by-sampling-from-the-posterior">
+
+<p>Inference about the response rate can be carried out by simulating a large number of draws from the posterior and summarizing the simulated sample.</p>
+
+<pre class = 'prettyprint lang-r'>beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+beta.post = beta.prior + c(3,0)
+post.sample = rbeta(1000, beta.post[1], beta.post[2])
+quantile(post.sample, c(0.05, 0.95))</pre>
+
+<pre >##        5%       95% 
+## 0.1868793 0.6648908</pre>
+
+</article></slide><slide class=''><hgroup><h2>Predictive distribution</h2></hgroup><article  id="predictive-distribution">
+
+<p>Suppose we want to predict the number of no adverse events (successes) in the next cohort of 3 patients.</p>
+
+<pre class = 'prettyprint lang-r'>beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+
+n = 3
+s = 0:n
+pred.probs = pbetap(beta.prior, n, s)
+discint(cbind(s, pred.probs), 0.95)</pre>
+
+<pre >## $prob
+## [1] 0.9763719
+## 
+## $set
+## [1] 0 1 2</pre>
+
+</article></slide><slide class=''><hgroup><h2>Predictive distribution</h2></hgroup><article  id="predictive-distribution-1">
+
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" title="" alt="" width="720" style="display: block; margin: auto;" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Getting the slides</h2></hgroup><article  id="getting-the-slides">
+
+<ul>
+<li>The slides for this course were created with Rmarkdown: <a href='http://rmarkdown.rstudio.com/' title=''><a href='http://rmarkdown.rstudio.com/' title=''>http://rmarkdown.rstudio.com/</a></a>.</li>
+<li>They are available from <a href='https://github.com/berkeley3/bayesianCT-course' title=''><a href='https://github.com/berkeley3/bayesianCT-course' title=''>https://github.com/berkeley3/bayesianCT-course</a></a>.</li>
+<li><p>To re-compile the slides:</p>
+
+<ul>
+<li>Download the directory containing the lecture from Github</li>
+<li>In R open the .Rmd file and set the working directory to the lecture directory</li>
+<li>Click the <em>KnitHTML</em> button on Rstudio or run the following commands:</li>
+</ul></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>library(rmarkdown) 
+render(&quot;index.Rmd&quot;)</pre></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "index_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

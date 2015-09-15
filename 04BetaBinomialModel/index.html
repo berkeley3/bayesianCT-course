@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bayesian Clinical Trials</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="index_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Bayesian Clinical Trials',
+                        subtitle: 'An introduction to the Beta-Binomial model',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets\css\ioslides.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Background</h2></hgroup><article  id="background">
+
+<p>For a phase IIA trial, suppose our goal is to evaluate the response rate \(\pi\) for a new drug by testing the hypotheses \[H_{0}: \pi \le p_{0} \phantom{0}H_{1}: \pi \ge p_{1}\]</p>
+
+<p>Suppose we set a maximum number of accrued patients \(N_{max}\), and assume that the number of responses \(X\) among the current \(n\) patients follows a Binomial distribution with parameter \(\pi\). The binomial likelihood is: \[f\left(x|\pi,n\right)=\binom{n}{x} \pi^{x}\left(1-\pi\right)^{1-x}\]</p>
+
+</article></slide><slide class=''><hgroup><h2>Prior</h2></hgroup><article  id="prior">
+
+<p>We assume that the prior distribution of the response rate, \(\pi\), follows a Beta distribution: \[g\left(\pi\right)=Beta\left(c,d\right)=B\left(c,d\right)^{-1}\pi^{c-1}\left(1-\pi\right)^{d-1}\]</p>
+
+<p>The quantity \(c/\left(c + d\right)\) gives the prior mean, while the magnitude of \(c + d\) indicates how informative the prior is. The larger this sum, the more informative the prior and the stronger the belief it contains.</p>
+
+</article></slide><slide class=''><hgroup><h2>The conjugacy property</h2></hgroup><article  id="the-conjugacy-property">
+
+<p>By the conjugacy of the beta prior and binomial likelihood, the posterior distribution of the response rate follows a beta distribution with parameters \(c+x\) and \(d+n-x\): \[f\left(\pi|x,n,c,d\right)=\frac{f\left(x|\pi,n\right)g\left(\pi\right)}{\int_0^1 f\left(x|\pi,n\right)g\left(\pi\right) d\pi}\] \[f\left(\pi|x,n,c,d\right)= \frac {\pi^{c+x-1}\left(1-\pi\right)^{d+n-x-1}} {B\left(c+x,d+n-x\right)}\]</p>
+
+<p>Whenever we have a prior that is conjugate to the likelihood, the posterior distribution belongs to the same family of distributions as the prior. As a consequence, conjugate priors are extremely useful tools in Bayesian statistics, since they make things a lot more analytically tractable.</p>
+
+</article></slide><slide class=''><hgroup><h2>Posterior distribution</h2></hgroup><article  id="posterior-distribution">
+
+<p>Once we have computed (or obtained an estimate of) the posterior, inference comes down merely to summarizing this distribution, since by Bayes&#39; Rule the posterior summarizes everything we know about the model parameters in light of the data.</p>
+
+</article></slide><slide class=''><hgroup><h2>Example</h2></hgroup><article  id="example">
+
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" title="" alt="" width="720" /></p>
+
+</article></slide><slide class=''><hgroup><h2>Posterior predictive probability</h2></hgroup><article  id="posterior-predictive-probability">
+
+<p>Suppose that you&#39;ve constructed a beta-binomial model for data on the current \(n\) patients and you want to make a prediction about what you expect to happen next. The first thing that we might want to know is the posterior mean; that is, our best point estimate for \(\pi\). This is given by:</p>
+
+<p>\[
+E\left(\pi|x,n,c,d\right)=\int_0^1 {\pi f\left(\pi|x,n\right) d\pi}=...=\left(c+x\right)/\left(c+d+n\right)
+\]</p>
+
+<p>What about the more general prediction about future data?</p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<p>Imagine that we then aim to enroll an additional \(m\) patients. What is the probability that exactly \(i\) of these are successes?</p>
+
+<p>\[
+f\left(i|m,n,x,c,d\right)=\int_0^1 {f\left(i|\pi,m\right)f\left(\pi|n,x,c,d\right) d\pi}
+\]</p>
+
+<p>The general name for the expected distribution over future observations is the posterior predictive distribution. If the prior distribution is \(Beta\left(c,d\right)\) and the likelihood is \(Binomial\left(n,\pi\right)\), then the posterior predictive distribution is a \(Beta-Binomial\left(m,c+x,d+n-x\right)\) distribution.</p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<p>The predictive probability approach looks into the future based on the current observed data to project whether a positive conclusion at the end of study is likely or not, and then makes a sensible decision at the present time accordingly.</p>
+
+<p>Suppose that we can claim for efficacy is the posterior probability of \(\pi\) exceeding \(p_{0}\) is greater than a threshold value \(\gamma\). Let Y be the number of responses of \(m\) future patients following a \(Beta-Binomial\left(m,c+x,d+n-x\right)\) distribution.<br/>We can calculate the predictive probability (PP) of trial success as: \[
+PP=\sum_{i=0}^{m}{P\left(Y=i\right|x)}\phantom{0} I\left[P\left(\pi&gt;p_{0}|x,Y=i\right)&gt;\gamma\right]
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<p>A high PP means that the treatment is likely to be efficacious by the end of the study, given the current data, whereas a low PP suggests that the treatment may not have suffcient activity. We define a rule by introducing two thresholds on PP:</p>
+
+<ul>
+<li>if \(PP&lt;\gamma_{lower}\) then stop the trial and reject \(H_{1}\)</li>
+<li>if \(PP&gt;\gamma_{upper}\) then stop the trial and reject \(H_{0}\)</li>
+<li>otherwise continue accrual till reaching \(N_{max}\)</li>
+</ul>
+
+<p>For phase IIA trials, we often prefer to choose \(\gamma_{lower}&gt;0\) and \(\gamma_{upper}=1\) to allow early stopping due to futility, but not due to efficacy.</p>
+
+</article></slide><slide class=''><hgroup><h2>References</h2></hgroup><article  id="references">
+
+<ul>
+<li>Berry S.M., Carlin B.P., Lee J.J. , Muller P. Bayesian Adaptive Methods for Clinical Trials. 2011 Chapman &amp; Hall.</li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "index_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bayesian Clinical Trials</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="index_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Bayesian Clinical Trials',
+                        subtitle: 'Case study',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets\css\ioslides.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Example</h2></hgroup><article  id="example">
+
+<p>Osteosarcoma is the most common malignant bone tumor in children and young adults and prognosis after its recurrence is poor.</p>
+
+<p>There is a need to identify novel effective agents and these agents are usually evaluated initially in patients with relapsed osteosarcoma.</p>
+
+<p>Consider the design of a controlled phase II B trial to compare two different treatment, say A and B, with (dichotomized) response measured according to RECIST criteria as outcome.</p>
+
+<p>What sample size is needed to provide sufficient information to specify the true difference in response rates to within a total interval width of 20 percentage points?</p>
+
+</article></slide><slide class=''><hgroup><h2>Evidence</h2></hgroup><article  id="evidence">
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Phase II Study</th>
+<th align="left">Treatment</th>
+<th align="left">Sample Size</th>
+<th align="left">Responses (%)</th>
+<th align="left">95% CI</th>
+</tr>
+<tr class="odd">
+<td align="left">1</td>
+<td align="left">A</td>
+<td align="left">26</td>
+<td align="left">5 (19)</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="left">B</td>
+<td align="left">37</td>
+<td align="left">14 (37)</td>
+<td align="left">22;53</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">A</td>
+<td align="left">14</td>
+<td align="left">4 (28.5)</td>
+<td align="left"></td>
+</tr>
+</table>
+
+<p>Assume a pooled estimate for Treatment A: \(\frac{9}{40}=22.5\)</p>
+
+<p>Assume an estimate for Treatment B: \(\frac{14}{37}=38.0\)</p>
+
+</article></slide><slide class=''><hgroup><h2>Frequentist Sample size (per group) by \(l\) and \((1-\alpha)\)</h2></hgroup><article  id="frequentist-sample-size-per-group-by-l-and-1-alpha">
+
+<p>If we consider not only the estimates but also uncertainty, for example the upper and lower limit of the 95% confidence interval, we can get different sample sizes:</p>
+
+<pre class = 'prettyprint lang-r'>library(SampleSizeProportions)</pre>
+
+<pre >##              theta= -0.01 theta= 0.02 theta= 0.15 theta= 0.3
+## length= 0.2           134         141         159        164
+## length= 0.21          122         128         144        149
+## length= 0.22          111         116         132        136
+## length= 0.24           94          98         111        114
+## length= 0.25           86          90         102        105</pre>
+
+<p>Which is best?</p>
+
+</article></slide><slide class=''><hgroup><h2>Priors</h2></hgroup><article  id="priors">
+
+<ul>
+<li>For Treatment A we can assume that 0.225 is the mean of a Beta distribution: \(Beta\left(c_{1}=9,d_{1}=31\right)\)</li>
+<li>For Treatment B we can assume that 0.38 is the mean of a Beta distribution: \(Beta\left(c_{2}=14,d_{2}=23\right)\)</li>
+</ul>
+
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" title="" alt="" width="720" /></p>
+
+</article></slide><slide class=''><hgroup><h2>SampleSizeProportions package</h2></hgroup><article  id="samplesizeproportions-package">
+
+<p>SampleSizeProportions implements a set of functions for calculating required sample sizes for</p>
+
+<ul>
+<li>Average Length Criterion (ALC)</li>
+<li>Average Coverage Criterion (ACC)</li>
+<li>Worst Outcome Criterion (WOC)</li>
+</ul>
+
+<p>in the context of binomial observations.</p>
+
+<pre class = 'prettyprint lang-r'>library(SampleSizeProportions)</pre>
+
+</article></slide><slide class=''><hgroup><h2>Bayesian Sample size (per group) by \(l\) and \((1-\alpha)\)</h2></hgroup><article  id="bayesian-sample-size-per-group-by-l-and-1-alpha">
+
+<pre >##              lev= 0.9 lev= 0.95 lev= 0.99
+##              ACC      ACC       ACC      
+## length= 0.2  70       116       228      
+## length= 0.22 52       89        182      
+## length= 0.25 31       60        132      
+##              -        -         -        
+##              ALC      ALC       ALC      
+## length= 0.2  70       115       225      
+## length= 0.22 51       89        180      
+## length= 0.25 31       60        131      
+##              -        -         -        
+##              WOC      WOC       WOC      
+## length= 0.2  96       153       292      
+## length= 0.22 73       120       234      
+## length= 0.25 48       84        172</pre></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "index_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

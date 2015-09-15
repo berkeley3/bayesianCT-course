@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bayesian Clinical Trials</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="index_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Bayesian Clinical Trials',
+                        subtitle: 'Single Threshold Design Extension',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets\css\ioslides.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Single Threshold Design Extension</h2></hgroup><article  id="single-threshold-design-extension">
+
+<ul class = 'build'>
+<li>Single Threshold Design</li>
+<li>Single Threshold Design extension using different kinds of informative prior distributions</li>
+<li>Bayesian modification of the Simon&#39;s design to control frequentist error rates and comparison with Tan and Machin&#39;s STD</li>
+<li>a Bayesian two-stage design based on the pre-experimental control of the probability of having a large posterior probability that the true response rate exceeds a target value.</li>
+<li>this probability is computed with respect to the prior predictive distribution of the data: this design can be considered a predictive version of the STD</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Two-stage design</h2></hgroup><article  id="two-stage-design">
+
+<p>\(n_1\) patients, \(\quad Y=\left\{\begin{array}{ll} 1 &amp; \rm{responder\ to\ drug}\\ 0 &amp; \rm{otherwise}\end{array}\right.\)</p>
+
+<ul>
+<li><strong>First stage</strong> \[
+s_1=\sum_{i=1}^{n_1} y_i \left\{\begin{array}{ll}\leq r_1 &amp; \rm{experiment\ stops}\\
+&gt;r_1 &amp; \rm{enrolled\ additional}\ n_2  \rm{\ patients \ for\ 2nd\ stage}\end{array}\right.
+\]</li>
+</ul>
+
+<p>-<strong>Second stage</strong> \[
+s=\sum_{i=1}^{n_1+n_2}y_i\left\{\begin{array}{ll}\leq r &amp; \rm{experiment\ stops}\\
+    &gt;r &amp; \rm{drug\ candidate\ for\ phase\ III}
+\end{array}\right.
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2>The predictive Single Threshold Design</h2></hgroup><article  id="the-predictive-single-threshold-design">
+
+<ul>
+<li>It takes the random nature of the data into account</li>
+<li>the posterior probabilities that \(\theta\) exceeds \(\theta_u\) in the two stages are considered random since they are functions of S1 and S, which are random variables</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Predictive two-stage design</h2></hgroup><article  id="predictive-two-stage-design">
+
+<ul>
+<li><p>Given the number of respondents \(s_1\) at the end of stage 1, the posterior distribution of \(\theta\) is \[
+\pi_{n_1}(\theta | S_1=s_1)\propto \pi(\theta)\times{\rm Binomial}(s_1; n_1, \theta)
+\] which is a \({\rm Beta}(\alpha+s_1, \beta+n_1-s_1)\) in the usual conjugate analysis.</p></li>
+<li><p>Given the total number of respondents \(s\) at the end of stage 2, the posterior distribution of \(\theta\) is \[
+\pi_n(\theta | S_1&gt;r_1, S=s)\propto \pi(\theta|S_1&gt;r_1)\times{\rm Binomial}(s; n, \theta)
+\] which is still \({\rm Beta}(\alpha+s, \beta+n-s)\) in a conjugate analysis.</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>The single threshold design (Tan and Machin 2002)</h2></hgroup><article  id="the-single-threshold-design-tan-and-machin-2002">
+
+<p>-<strong>Objective</strong>: to choose the minimun sample size such that the posterior probability \(\theta&gt;\theta_u\) is greater or equal to a fixed threshold when the response rate is equal to \(\theta_u\) + some small value \(\epsilon&gt;0\)</p>
+
+<p>-Drug passes phase II if \(\theta&gt; \theta_u\) (target value) if:</p>
+
+<p>\[\left\{\begin{array}{ll}\min n_1 &amp; \pi_{n_1}(\theta &gt;\theta_u | S_1=(\theta_u+\epsilon)n_1)\geq\lambda_1\\
+ &amp; \\
+\min n &amp; \pi_n(\theta&gt;\theta_u|S=(\theta_u+\epsilon)n)\geq\lambda_2
+\end{array}\right.
+\]</p>
+
+<p>where \(\lambda_1\) and \(\lambda_2\) are fixed probability thresholds.</p>
+
+</article></slide><slide class=''><hgroup><h2>Bayesian sample size determination</h2></hgroup><article  id="bayesian-sample-size-determination">
+
+<p>Bayesian sample size determination is a form of pre-posterior analysis, i.e. assessment of the value of data before they become available, in which the prior distribution role is twofold:</p>
+
+<ul>
+<li>to obtain \(\pi(\theta|S)\) for posterior analysis</li>
+<li><p>to define the marginal (predictive) distribution \(m(\theta; S)=\int_{0}^{1}{\rm Binomial}(s; n, \theta)\times \pi(\theta) d\theta\) for pre-posterior analysis</p></li>
+<li><p>Following Wang and Gelfand 2002, the fitting or analysis prior \(\pi(\cdot|S)\) and the sampling or design prior \(m(\cdot;S)\) do not necesarily have to coincide.</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Predictive version of the STD (Sambucini, 2008)</h2></hgroup><article  id="predictive-version-of-the-std-sambucini-2008">
+
+<ul>
+<li><p>The posterior probabilities that \(\theta&gt;\theta_u\) in the two stages are considered random since they are function of \(S_1\) and \(S\), which are random variables</p></li>
+<li><p>Determine two fixed thresholds probabilities \(\gamma_1\) and \(\gamma_2\) such that</p></li>
+</ul>
+
+<p>\[
+\begin{align}
+\mathbb{P}\left[\pi_{n_1}(\theta &gt;\theta_u | S_1=(\theta_u+\epsilon)n_1)\geq\lambda_1\right]\geq\gamma_1
+\end{align}
+\]</p>
+
+<p>and</p>
+
+<p>\[\begin{align}
+\mathbb{P}\left[\pi_n(\theta&gt;\theta_u|S=(\theta_u+\epsilon)n)\geq\lambda_2\right]\geq\gamma_2
+\end{align}
+\]</p>
+
+<p>where \(\mathbb{P}\) is the probability measure corresponding to the predictive (or marginal) distribution of the data</p>
+
+</article></slide><slide class=''><hgroup><h2>Analysis and Design prior</h2></hgroup><article  id="analysis-and-design-prior">
+
+<ul>
+<li><strong>Analysis prior:</strong> embodies the effective uncertainty on \(\theta\) (it is used to form the posterior distribution for making inference)</li>
+<li><strong>Design prior:</strong> describes a scenario under which a sensible sample size is established a priori according to a design criterion.</li>
+</ul>
+
+<p><span style="color:red">
+ <strong>Objective:</strong></span> use of a subjective prior based on elicitation of expert opinions for design prior.</p>
+
+</article></slide><slide class=''><hgroup><h2>The predictie STD design \(1^{st}\) stage</h2></hgroup><article  id="the-predictie-std-design-1st-stage">
+
+<p>Given the target response rate \(\theta_u\), consider the r.v. \(\pi_{n_1}(\theta &gt; \theta_u | S_1)\)</p>
+
+<ul>
+<li><p>given the probability thresholds \((\lambda_1,\gamma_1)\), select the smallest sample size \(n_1^*\) such that \(\forall n_1&gt;n_1^*\) \[
+\mathbb{P}[\pi_{n_1}(\theta &gt;\theta_u|S_1)\geq\lambda_1]\geq\gamma_1
+\]</p></li>
+<li><p>\(\mathbb{P}\) is the probability measure corresponding to the prior predictive distribution of \(S_1\) induced by the design (sampling) prior: \[
+\mathbb{P}[\pi_{n_1}(\theta &gt;\theta_u|S_1)\geq\lambda_1]=\sum_{s_1=\tilde{r}_1}^{n_1}m(S_1)
+\]</p></li>
+</ul>
+
+<p>where \(\tilde{r}_1\) is the smallest \(s_1\) such that \(\pi_{n_1}(\theta &gt;\theta_u|s_1)\geq\lambda_1\).</p>
+
+<ul>
+<li>Once the optimal value \(n^*_1\) is selected, then \(r^*_1=\tilde{r}_1-1\)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>The predictie STD design \(2^{nd}\) stage</h2></hgroup><article  id="the-predictie-std-design-2nd-stage">
+
+<p>Given the target response rate \(\theta_u\), consider the r.v. \(\pi_{n_1}(\theta &gt; \theta_u | S)\)</p>
+
+<ul>
+<li><p>given the probability thresholds \((\lambda_2,\gamma_2)\), select the smallest \(n*\) such that \(\forall n&gt;n^*\) \[
+\mathbb{P}[\pi_n(\theta &gt;\theta_u|S)\geq\lambda_2]\geq\gamma_2
+\]</p></li>
+<li><p>\(\mathbb{P}\) is the probability measure corresponding to the prior predictive distribution of \(S\) induced by the design (sampling) prior: \[
+\mathbb{P}[\pi_{n}(\theta &gt;\theta_u|S)\geq\lambda_2]=\sum_{s=\tilde{r}}^{n}m(s|S_1&gt;r^*)
+\]</p></li>
+</ul>
+
+<p>where \(\tilde{r}\) is the smallest \(s\) such that \(\pi_{n}(\theta &gt;\theta_u|s)\geq\lambda_2\).</p>
+
+<ul>
+<li>Once the optimal value \(n^*\) is selected, then \(r^*=\tilde{r}-1\)</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Getting the slides</h2></hgroup><article  id="getting-the-slides">
+
+<ul>
+<li>The slides for this course were created with Rmarkdown: <a href='http://rmarkdown.rstudio.com/' title=''><a href='http://rmarkdown.rstudio.com/' title=''>http://rmarkdown.rstudio.com/</a></a>.</li>
+<li>They are available from <a href='https://github.com/berkeley3/bayesianCT-course' title=''><a href='https://github.com/berkeley3/bayesianCT-course' title=''>https://github.com/berkeley3/bayesianCT-course</a></a>.</li>
+<li><p>To re-compile the slides:</p>
+
+<ul>
+<li>Download the directory containing the lecture from Github</li>
+<li>In R open the .Rmd file and set the working directory to the lecture directory</li>
+<li>Click the <em>KnitHTML</em> button on Rstudio or run the following commands:</li>
+</ul></li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>library(rmarkdown) 
+render(&quot;index.Rmd&quot;)</pre></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "index_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

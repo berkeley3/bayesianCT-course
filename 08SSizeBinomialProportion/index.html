@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bayesian Clinical Trials</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/fonts/fonts.css">
+
+  <link rel="stylesheet" media="all" href="index_files/ioslides-13.5.1/theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="index_files/ioslides-13.5.1/theme/css/phone.css">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Bayesian Clinical Trials',
+                        subtitle: 'Sample Size for Binomial Proportions',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                favIcon: 'index_files/logo.png',
+              },
+
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+
+    slides > slide:not(.nobackground):before {
+      font-size: 12pt;
+      content: "";
+      position: absolute;
+      bottom: 20px;
+      left: 60px;
+      background: url(index_files/logo.png) no-repeat 0 50%;
+      -webkit-background-size: 30px 30px;
+      -moz-background-size: 30px 30px;
+      -o-background-size: 30px 30px;
+      background-size: 30px 30px;
+      padding-left: 40px;
+      height: 30px;
+      line-height: 1.9;
+    }
+  </style>
+
+  <link rel="stylesheet" href="assets\css\ioslides.css" type="text/css" />
+
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <aside class="gdbar"><img src="index_files/logo.png"></aside>
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
+
+<slide class=''><hgroup><h2>Sample size based on interval widths</h2></hgroup><article  id="sample-size-based-on-interval-widths">
+
+<p>What sample size is needed to provide sufficient information to specify the true difference between two proportions \(\pi_{1}\) and \(\pi_{2}\) to within a total 100(1-\(\alpha\)) interval width of given percentage points (say \(w\))? \[
+n=4Z_{1-\alpha/2}^2\frac{\left[\pi_{1}\left(1-\pi_{1}\right)+\pi_{2}\left(1-\pi_{2}\right)\right]}{w^2}
+\]</p>
+
+<p>This formula requires point estimates of \(\pi_{1}\) and \(\pi_{2}\) while a better summary of the available information is a distribution over a range of values.</p>
+
+</article></slide><slide class=''><hgroup><h2>Bayesian approach</h2></hgroup><article  id="bayesian-approach">
+
+<p>Let \(\theta\) in \(\Theta\) the parameter of interest. We recall that the posterior distribution is \[
+f\left(\theta|x\right)=\frac{L\left(x|\theta\right)g\left(\theta\right)}{\int_\Theta L\left(x|\theta\right)g\left(\theta\right) d\theta}
+\] and depends on the data \(x\), which is of course unknown at the planning stages of the experiment. The pre-posterior predictive distribution is defined by the denominator in Bayes&#39; Theorem which decribes the expectation of the likelihood function over the prior distribution: \[
+f\left(x\right)=\int_\Theta L\left(x|\theta\right)g\left(\theta\right) d\theta
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<p>We refer to as fully Bayesian (FB) approach when \(g\left(\theta\right)\) represents the true prior information in both posterior and pre-posterior predictive distributions</p>
+
+<p>We refer to as mixed Bayesian/likelihood (MBL) approach when \(g\left(\theta\right)\) represents the true prior information in posterior distribution but substitutes a uniform density in pre-posterior.</p>
+
+<p>Typically, we wish a highest posterior density (HPD) or other posterior credible interval of length \(l\) that covers \(\theta\) with probability \((1-\alpha)\). HPD are optimal in the sense that they lead to the smallest sample sizes for any given coverage.</p>
+
+</article></slide><slide class=''><hgroup><h2>Criteria based on HPD (Joseph et al, 1997)</h2></hgroup><article  id="criteria-based-on-hpd-joseph-et-al-1997">
+
+<ul>
+<li>ACC: controls the coverage rate of fixed length credible intervals over the predictive distribution of the data</li>
+<li>ALC: controls the length of credible intervals with a fixed coverage rate over the predictive distribution of the data.</li>
+<li>WOC: guarantees that the desired coverage rate and interval length over all (or a subset of) possible datasets.</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Average Coverage Criterion (ACC)</h2></hgroup><article  id="average-coverage-criterion-acc">
+
+<p>The ACC sample size is the smallest integer such that for a fixed nominal interval length \(l\) the expected coverage level is at least \(1 - \alpha\), where expectation is taken over the marginal distribution of \(x\): \[
+\int \left(\int_{a\left(x,n\right)}^{a\left(x,n\right)+l} f\left(\theta|x\right) d\theta\right) f\left(x\right) dx \ge 1-\alpha 
+\]</p>
+
+<p>where \(a\left(x,n\right)\) is the lower limit of the HPD interval of length \(l\) for the posterior density.</p>
+
+</article></slide><slide class=''><hgroup><h2>Average Length Criterion (ALC)</h2></hgroup><article  id="average-length-criterion-alc">
+
+<p>The ALC sample size is the smallest integer such that for a fixed nominal coverage level \(1 - \alpha\) the expected length is at most \(l\), where expectation is taken over the marginal distribution of \(x\). The ALC has a two-step formula. The first step is to find the HPD length \(l&#39;\left(x,n\right)\) that satisfies \[
+\int_{a\left(x,n\right)}^{a\left(x,n\right)+l&#39;\left(x,n\right)} f\left(\theta|x\right) d\theta=1-\alpha
+\] Then choose the minimum \(n\) that satisfies: \[
+\int  l&#39;\left(x,n\right) f\left(x\right) dx \le l
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2>Worst Outcome Criterion (WOC)</h2></hgroup><article  id="worst-outcome-criterion-woc">
+
+<p>The WOC sample size is determined by the smallest integer \(n\) such that \[
+\inf \left(\int_{a\left(x,n\right)}^{a\left(x,n\right)+l} f\left(\theta|x\right) d\theta\right) \ge 1-\alpha 
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2>Comparison between ALC, ACC and WOC (Cao et al, 2009)</h2></hgroup><article  id="comparison-between-alc-acc-and-woc-cao-et-al-2009">
+
+<ul>
+<li><p>Because most researchers tend to report the length of the confidence interval of a fixed coverage, instead of the coverage of the interval of a fixed length, the ALC is more conventional than the ACC.</p></li>
+<li><p>WOC provides a conservative sample size and can give more assurance than the &quot;average&quot; assurances provided by the ACC and ALC criteria.</p></li>
+<li><p>When a posterior density has the common density shape of concave flat tails and convex steep center, the nominal coverage \(1-\alpha\) will determine the relative difference between the ALC sample size and the ACC sample size. A &quot;small&quot; \(\alpha\) implies that ACC needs a larger sample size than the ALC. It is the opposite for &quot;bigger&quot; \(\alpha\).</p></li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>The difference of two binomial proportions</h2></hgroup><article  id="the-difference-of-two-binomial-proportions">
+
+<p>Let \(x_{1}\) and \(x_{2}\) be the total number of successes out of \(n_{1}\) and \(n_{2}\) trials from independent binomial experiments with parameters \(\pi_{1}\) and \(\pi_{2}\), respectively. We can choose two independent beta priors \(g\left(\pi_{1}\right)=Beta\left(c_{1},d_{1}\right)=B\left(c_{1},d_{1}\right)^{-1}\pi_{1}^{c_{1}-1}\left(1-\pi_{1}\right)^{d_{1}-1}\) \(g\left(\pi_{2}\right)=Beta\left(c_{2},d_{2}\right)=B\left(c_{2},d_{2}\right)^{-1}\pi_{2}^{c_{2}-1}\left(1-\pi_{2}\right)^{d_{2}-1}\)</p>
+
+<p>for \(\pi_{1}\) and \(\pi_{2}\), respectively - each conjugate to the binomial likelihood - so the posterior distribution is the product of two Beta distributions:</p>
+
+<p>\[
+\begin{align}
+&amp; f\left(\pi_{1},\pi_{2}\right|x_{1},x_{2},n_{1},n_{2})= \\
+&amp; = \frac {\prod_{i=1}^2 {\pi_{i}^{c_{i}+x_{i}-1}\left(1-\pi_{i}\right)^{d_{i}+n_{i}-x_{i}-1}}} {B\left(c_{1}+x_{1},d_{1}+n_{1}-x_{1}\right)B\left(c_{2}+x_{2},d_{2}+n_{2}-x_{2}\right)}
+\end{align}
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<p>and the predictive distribution is the product of two betabinomial distributions: \[
+\begin{align}
+&amp; p\left(x_{1},x_{2}\right)=\\
+&amp;=\prod_{i=1}^2 {\left[B\left(c_{i}+x_{i},d_{i}+n_{i}-x_{i}\right)B\left(c_{i},d_{i}\right)\right]^{-1}\pi_{i}^{c_{i}+x_{i}-1}\left(1-\pi_{i}\right)^{d_{i}+n_{i}-x_{i}-1} }
+\end{align}
+\]</p>
+
+<p>We make a change of variable as \(\theta=\pi_{2}-\pi_{1}\) and the posterior becomes:</p>
+
+<p>\[
+\begin{align}
+&amp; f\left(\pi_{1},\theta|x_{1},x_{2},n_{1},n_{2}\right)\propto \\
+&amp; \propto \pi_{1}^{c_{1}+x_{1}-1}\left(1-\pi_{1}\right)^{d_{1}+n_{1}-x_{1}-1} \left(\pi_{1}-\theta\right)^{c_{2}+x_{2}-1}\left(1-\pi_{1}+\theta\right)^{d_{2}+n_{2}-x_{2}-1}
+\end{align}
+\]</p>
+
+<p>It follows that the marginal posterior distribution of \(\theta\) is</p>
+
+<p>\[
+f\left(\theta|x_{1},x_{2},n_{1},n_{2}\right)=\int_{\max{0,\theta}}^{\min{\theta+1,1}} f\left(\pi_{1},\theta|x_{1},x_{2},n_{1},n_{2}\right) d\pi_{1}
+\]</p>
+
+<p>For ease, assume \(n_{1}=n_{2}=n\)</p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<ul>
+<li>ACC sample size for \(\theta\) is the minimum n:</li>
+</ul>
+
+<p>\[
+\sum_{x_{1}=0}^{n} \sum_{x_{2}=0}^{n} \int_{a\left(x_{1},x_{2}\right)}^{a\left(x_{1},x_{2}\right)+l} f\left(\theta|x_{1},x_{2},n\right)d\theta\phantom{0}p\left(x_{1},x_{2}\right) \ge 1-\alpha 
+\]</p>
+
+<ul>
+<li>ALC sample size for \(\theta\) is the minimum n:</li>
+</ul>
+
+<p>\[
+\sum_{x_{1}=0}^{n} \sum_{x_{2}=0}^{n} l&#39;\left(x_{1},x_{2}\right) p\left(x_{1},x_{2}\right) \le l 
+\]</p>
+
+<p>where \(l&#39;\left(x_{1},x_{2}\right)\) is the HPD length that satisfies:</p>
+
+<p>\[
+\int_{a\left(x_{1},x_{2}\right)}^{a\left(x_{1},x_{2}\right)+l&#39;\left(x_{1},x_{2}\right)} f\left(\theta|x_{1},x_{2},n\right)d\theta =1-\alpha
+\]</p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<ul>
+<li>WOC sample size for \(\theta\) is the minimum n:</li>
+</ul>
+
+<p>\[
+\int_{a\left(x_{1}^{*},x_{2}^{*}\right)}^{a\left(x_{1}^{*},x_{2}^{*}\right)+l} f\left(\theta|x_{1}^{*},x_{2}^{*},n\right)d\theta \ge 1-\alpha
+\]</p>
+
+<p>where \(x_{1}^{*}\) and \(x_{2}^{*}\) are the numbers of successes that maximize the length of the HPD interval.</p>
+
+</article></slide><slide class=''><hgroup><h2>Example (Joseph et al, 1997)</h2></hgroup><article  id="example-joseph-et-al-1997">
+
+<p>Consider a clinical trial planned to study the rates of myocardial infraction (MI) for patients with acute unstable angina pectoris following two different study regimens.</p>
+
+<p>A previous study reported MI rates in aspirin group=4/121, in aspirin and heparin combination group= 2/122 and 14/118 in placebo group.</p>
+
+<p>Using the above prior information, what sample size do we need so that the 95% HPD interval for the difference in rates between aspirin and aspirin with heparin has a total length of 3 percentage points?</p>
+
+</article></slide><slide class=''><hgroup><h2></h2></hgroup><article >
+
+<center>
+
+<img src='images/Figure.png' title=''/>
+
+<center>
+
+</article></slide><slide class=''><hgroup><h2>R code</h2></hgroup><article  id="r-code">
+
+<pre class = 'prettyprint lang-r'>suppressWarnings(library(SampleSizeProportions))
+len&lt;-0.03
+level&lt;-0.95
+a&lt;-matrix(0,1,4)
+colnames(a)&lt;-c(&quot;ACC&quot;,&quot;ALC&quot;,&quot;WOC&quot;,&quot;frequentist&quot;)
+a[1]&lt;-propdiff.acc(len=len, 4, 117, 2, 120, level = level, equal = TRUE, m = 10000, mcs = 3)[1]
+a[2]&lt;-propdiff.alc(len=len, 4, 117, 2, 120, level = level, equal = TRUE, m = 10000, mcs = 3)[1]
+a[3]&lt;-propdiff.woc(len=len, 4, 117, 2, 120, level = level, equal = TRUE)[1]
+a[4]&lt;-propdiff.freq(len=len, p1=0.016, p2=0.033, level = level)[1]
+print(a)</pre>
+
+</article></slide><slide class=''><hgroup><h2>References</h2></hgroup><article  id="references">
+
+<ul>
+<li><p>Joseph L, du Berger R, Bélisle P. Bayesian and mixed Bayesian/likelihood criteria for sample size determination. Stat Med 1997; 16(7): 769-781.</p></li>
+<li><p>Cao J, Lee JJ, Alber S. Comparison of Bayesian sample size criteria: ACC, ALC, and WOC. J Stat Plan Inference 2009; 139(12):4111-4122.</p></li>
+</ul></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script src="index_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+<script src="index_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+<script src="index_files/ioslides-13.5.1/js/hammer.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-controller.js"></script>
+<script src="index_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "index_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
