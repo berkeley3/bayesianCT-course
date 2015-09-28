@@ -2,14 +2,8 @@
 title: "Bayesian Clinical Trials"
 subtitle: Single Threshold Design Extension  
 output:
-  ioslides_presentation:
-    css: assets/css/ioslides.css
-    logo: assets/img/logos3.png
-    mathjax: local
-    self_contained: no
-    widescreen: yes
-  beamer_presentation: default
-  slidy_presentation: default
+  beamer_presentation: 
+    keep_tex: true
 ---
 
 ## Single Threshold Design Extension

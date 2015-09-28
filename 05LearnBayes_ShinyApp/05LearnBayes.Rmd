@@ -1,0 +1,100 @@
+---
+title: "Bayesian Clinical Trials"
+subtitle: Informative vs. non-informative beta priors  
+output:
+  beamer_presentation: 
+    keep_tex: true
+---
+
+## Construction prior Beta
+ 
+## Updatindg with Data
+```{r}
+library(LearnBayes)
+```
+
+Suppose we are interested in the response $p$ of a drug. 
+
+- The  function __bayes.select__ allow for specifying a beta prior based on
+knowledge of two prior quantiles. 
+
+- Suppose the prior median for the response rate is 0.2 and the 75th percentile is 0.3.
+
+```{r}
+beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+print(beta.prior)
+```
+
+A beta(2.04, 7.19) prior matches this prior information
+
+## Updating with data
+- Next, suppose to observe for 3 successive patients no adverse events
+      + 3 successes and 0 failures
+      
+The posterior distribution is...
+
+## Triplot
+The triplot function shows the prior, likelihood, and posterior on the same
+display
+
+```{r, fig.align='center'}
+beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+triplot(beta.prior, c(3,0))
+```
+
+## Inference by sampling from the posterior
+Inference about the response rate can be carried out by simulating a large number
+of draws from the posterior and summarizing the simulated sample.
+
+```{r}
+beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+beta.post = beta.prior + c(3,0)
+post.sample = rbeta(1000, beta.post[1], beta.post[2])
+quantile(post.sample, c(0.05, 0.95))
+```
+
+
+## Predictive distribution
+
+Suppose we want to predict the number of no adverse events (successes) in the next cohort of 3 patients.
+
+```{r, eval=TRUE}
+
+beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+
+n = 3
+s = 0:n
+pred.probs = pbetap(beta.prior, n, s)
+discint(cbind(s, pred.probs), 0.95)
+```
+
+
+## Predictive distribution
+
+```{r, fig.align='center', echo=FALSE}
+
+beta.prior = beta.select(list(p=0.5, x=0.2), list(p=0.75, x=.3))
+
+n = 3
+s = 0:n
+pred.probs = pbetap(beta.prior, n, s)
+plot(s, pred.probs, type="h")
+```
+
+
+
+## Getting the slides
+
+* The slides for this course were created with Rmarkdown: [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/). 
+* They are available from [https://github.com/berkeley3/bayesianCT-course](https://github.com/berkeley3/bayesianCT-course).
+* To re-compile the slides:
+
+    + Download the directory containing the lecture from Github
+    + In R open the .Rmd file and set the working directory to the lecture directory
+    + Click the *KnitHTML* button on Rstudio or run the following commands: 
+  
+```{r RmarkdownChunk, eval=FALSE}
+library(rmarkdown) 
+render("index.Rmd")
+```
+

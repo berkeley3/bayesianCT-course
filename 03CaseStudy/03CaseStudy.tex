@@ -1,0 +1,332 @@
+\documentclass{beamer}
+
+\mode<presentation> {
+}
+
+\title[]{Bayesian Clinical Trials} 
+\subtitle{Real data case study} 
+\date{} 
+
+\usepackage{graphicx} 
+\usepackage{booktabs} 
+\usepackage{longtable} 
+ \usepackage{hyperref}
+
+
+\usepackage{color}
+\usepackage{fancyvrb}
+
+\definecolor{shadecolor}{gray}{1.00}
+
+\DefineShortVerb[commandchars=\\\{\}]{\|}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+\hypersetup{breaklinks=true, pdfborder={0 0 0}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  
+\setcounter{secnumdepth}{0}
+%\EndDefineVerbatimEnvironment{Highlighting}
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+\begin{frame}{Case Study (Chiappella et al, 2013)}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Primary endpoint: to determine the maximum tolerated dose (MTD) of
+  lenalidomide given in combination with fixed doses of R-CHOP in
+  elderly patients with untreated DLBCL.
+\end{itemize}
+
+\begin{center}
+\includegraphics[scale=1.8]{images/figure1.jpg}
+\end{center}
+
+
+\end{frame}
+
+\begin{frame}{Case Study (Chiappella et al, 2013)}
+
+\begin{itemize}
+\item
+  $d_{start}$ = 10 mg/day
+\item
+  DLT definition: the maximum dose inducing any grade $\ge 3$
+  non-hematologic toxicity or a delay \textgreater{}15 days of a planned
+  cycle date observed during the first two cycles
+\item
+  TTL=33\%
+\item
+  dose levels: 5, \emph{10}, 15, 20 mg/day
+\item
+  CRM
+\item
+  cohort size: 3
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{CRM}
+
+One parameter logistic model 
+$$ 
+P(Y=1\vert x_i)=\psi(x_i,\theta)=\frac{\exp(a_0+\theta x_i)}{1+\exp(a_0+\theta x_i)}
+$$ 
+
+
+where
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  $Y_{j}$ is the binary variable indicating toxicity for the $j-th$
+  patient
+\item
+  $x_{i}=\psi^{-1}\left(p_{i},\theta\right)$ is the standardized dose
+  level
+\item
+  $p_i$ the initial guesses of toxicity probability (i.e.
+  $p_1=0.15,\ p_2=0.20,\ p_3=0.25$, and $p_4=0.30$
+\item
+  $a_0$ is the intercept
+\item
+  $\theta$ is to be estimated.
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{Steps}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  choose a prior $\pi\left(\theta\right)$ for $\theta$
+\item
+  starting from $d_{start}$, compute sequentially, every after
+  \emph{c} patients (i.e.~3), the Bayesian posterior mean of the model
+  parameter, $\tilde{\theta_{j}}$ as
+\end{itemize}
+
+
+
+$$
+E\left(\theta_{j}\vert data\right)=\int_0^\infty \theta f\left(\theta\vert data\right) d\theta
+$$ where $f\left(\theta\vert data\right)$ is the posterior density:
+
+$$
+f\left(\theta\vert data\right)=\frac{L_{j}\left(\theta\right)\pi\left(\theta\right)}{\int_0^\infty L_{j}\left(u\right)\pi\left(u\right) du}
+$$
+
+\end{frame}
+
+
+\begin{frame}{Steps}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  compute \(\psi\left(x_{i},\tilde{\theta}_{c}\right)\) and the next 3
+  patients will be assigned to the (standardized) dose level, that
+  minimizes the distance
+  \[\vert\psi\left(x_{i},\tilde{\theta}_{c}\right)-TTL\vert\]
+\item
+  after inclusion of \emph{m} patients, the estimated probability of
+  toxicity for the recommended dose level (at that point!), \(x_{R}\),
+  will be \(\tilde{P}_{R\vert m}=\psi\left(x_{R},\tilde{\theta}_{m}\right)\)
+\item
+  a 1-\(\alpha\) credibility interval for \(P_{R\vert m}\) is
+  \(\left(\theta_{min};\theta_{max}\right)\) where\\\[ 
+  \int_{\theta_{min}}^{\theta_{max}} f\left(\theta\vert data\right) d\theta=1-\alpha 
+  \]
+\item
+  stop when the maximum sample size has been reached (i.e. \emph{n}=24)
+  or stopping rules have been fulfilled
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{Stopping rules (Zohar \& Chevret, 2001)}
+
+Rules based on posterior distribution 
+\begin{align}
+          & w_{1} = P\left[ \psi\left(x_{first},\tilde{\theta} \right)>TTL\vert data \right] \\
+          & w_{2} = P\left[ \psi\left(x_{last},\tilde{\theta} \right)<TTL\vert data \right] 
+\end{align}
+
+
+\(=>\) stop for wrong dose scale if \(w_{1}>0.9\) or \(w_{2}>0.9\)
+
+\end{frame}
+
+
+
+
+\begin{frame}{Stopping rules (Zohar \& Chevret, 2001)}
+
+Rules based on predictive distribution of \emph{z} future responses 
+\begin{align}
+          & w_{3} = \tilde{P}( X\left(j+1\right)=...X\left(j+z\right)\vert data ) \\
+          & w_{4} = \sum_{y_{1}=0}^{1}...\sum_{y_{z}=0}^{1}\vert \tilde{P}_{R\vert _{j+z}}-\tilde{P}_{R\vert _{j+1}}\vert P\left(Y_{j+1}=y_{1},...,Y_{j+z}=y_{z} \vert data \right) \\
+          & w_{5} = \max_{(y_{1},...,y_{z})}\vert\tilde{P}_{R\vert_{j+z}}-\tilde{P}_{R\vert _{j+1}}\vert 
+\end{align}
+
+
+\(=>\) stop for futility if \(w_{3}>0.9\)
+
+\(=>\) stop for no mean predictive or no maximal predictive gain in
+point estimate of the estimated probability of toxicity if
+\(w_{4}<0.05\) or \(w_{5}<0.05\), respectively
+
+\end{frame}
+
+
+\begin{frame}{Stopping rules (Zohar \& Chevret, 2001)}
+
+
+\begin{align*}
+          & w_{6} = \\
+          &\sum_{y_1=0}^1\ldots\sum_{y_z=0}^1\vert c_{\alpha,j+z}(P_R)-c_{\alpha,j+1}(P_R)\vert P(Y_{j+1}=y_1,..,Y_{j+z}=y_z \vert data ) \\
+          & w_{7} = \max_{(y_{1},...,y_{z})}\vert c_{\alpha,j+z}(P_{R})-c_{\alpha,j+1}(P_{R})\vert
+\end{align*}
+
+
+
+where \(c_{\alpha,.}\left(P_{R}\right)\) is the width of the
+100(1-\(\alpha\)) credibility interval of the toxicity probability at
+the recommended dose level \(d_{R}\).
+
+\(=>\) stop for no gain in accuracy of the estimated probability of
+toxicity if \(w_{6}<0.05\) or \(w_{7}<0.05\)
+
+\end{frame}
+
+
+\begin{frame}{Data}
+
+\begin{longtable}{cclllll}
+\toprule
+Cohort & Admin dose & Toxicity & 5 mg & 10 mg &
+15 mg & 20 mg\tabularnewline
+\midrule
+\endhead
+1 & 10 & (0,0,0) & & & &\tabularnewline
+2 & 20 & (1,1,0) & & & &\tabularnewline
+3 & 15 & (0,0,1) & & & &\tabularnewline
+4 & 15 & (1,0,0) & & & &\tabularnewline
+5 & 15 & (1,1,0) & & & &\tabularnewline
+6 & 10 & (0,0,1) & & & &\tabularnewline
+7 & 10 & (0,0,0) & & & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{bcrm package}
+
+bcrm implements a Bayesian CRM (O'Quigley et al, 1990) and can run
+interactively, allowing the user to enter outcomes after each cohort has
+been recruited.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(bcrm)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Binary toxicity outcome
+\item
+  Dose-toxicity models: Hyperbolic Tangent, Logistic (1-and 2-parameter)
+  and Power
+\item
+  Priors: Gamma, Uniform, Lognormal and Bivariate Lognormal
+\item
+  Stopping rules: maximum sample size, minimum sample size in conjuction
+  with precision of the MTD or maximum number treated ad MTD
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{R code}
+
+\begin{Shaded}
+\begin{Highlighting}
+\NormalTok{dose =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\DecValTok{5}\NormalTok{, }\DecValTok{10}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{20}\NormalTok{)}
+\NormalTok{p.tox0 =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\FloatTok{0.15}\NormalTok{, }\FloatTok{0.20}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.3}\NormalTok{)}
+\NormalTok{data =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{patient=}\DecValTok{1}\NormalTok{:}\DecValTok{3}\NormalTok{, }\DataTypeTok{dose=}\KeywordTok{rep}\NormalTok{(}\DecValTok{2}\NormalTok{,}\DecValTok{3}\NormalTok{), }\DataTypeTok{tox=}\KeywordTok{rep}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{3}\NormalTok{))}
+\NormalTok{target.tox =}\StringTok{ }\FloatTok{0.33}
+\KeywordTok{bcrm}\NormalTok{(}\DataTypeTok{stop =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{nmax=}\DecValTok{24}\NormalTok{, }\DataTypeTok{precision=}\KeywordTok{c}\NormalTok{(}\FloatTok{0.16}\NormalTok{,}\FloatTok{0.6}\NormalTok{)), }
+     \DataTypeTok{data =} \NormalTok{data, }
+     \DataTypeTok{p.tox0 =} \NormalTok{p.tox0, }
+     \DataTypeTok{dose =} \NormalTok{dose, }
+     \DataTypeTok{ff =} \StringTok{"logit1"}\NormalTok{,}
+     \DataTypeTok{prior.alpha =} \KeywordTok{list}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DataTypeTok{a=}\DecValTok{1}\NormalTok{, }\DataTypeTok{b=}\FloatTok{0.75}\NormalTok{),}
+     \DataTypeTok{target.tox =} \NormalTok{target.tox,}
+     \DataTypeTok{sdose.calculate =} \StringTok{"mean"}\NormalTok{,}
+     \DataTypeTok{constrain =} \OtherTok{FALSE}
+     \NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\end{frame}
+
+\begin{frame}{References}
+
+\begin{itemize}
+\item
+  Chiappella A, Tucci A, Castellino A et al. Lenalidomide plus
+  cyclophosphamide, doxorubicin, vincristine, prednisone and rituximab
+  is safe and effective in untreated, elderly patients with diffuse
+  large B-cell lymphoma: a phase I study by the Fondazione Italiana
+  Linfomi. Haematologica 2013; 98(11): 1732-1738.
+\item
+  Zohar S, Chevret S. The continual reassessment method: comparison of
+  Bayesian stopping rules for dose-ranging studies. Stat Med 2001; 20:
+  2827-2843.
+\item
+  O'Quigley J, Pepe M, Fisher L. Continual reassessment method: a
+  practical design for phase I clinical trials in cancer. Biometrics
+  1990; 46: 33-48.
+\end{itemize}
+
+\end{frame}
+
+
+\end{document}

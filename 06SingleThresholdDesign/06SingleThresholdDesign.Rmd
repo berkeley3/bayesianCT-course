@@ -2,15 +2,8 @@
 title: "Bayesian Clinical Trials"
 subtitle: Single Threshold Design  
 output:
-  ioslides_presentation:
-    css: assets/css/ioslides.css
-    logo: assets/img/logos3.png
-    mathjax: local
-    self_contained: no
-    widescreen: yes
-    tables: yes
-  beamer_presentation: default
-  slidy_presentation: default
+  beamer_presentation: 
+    keep_tex: true
 ---
 
 ## Phase II clinical trials

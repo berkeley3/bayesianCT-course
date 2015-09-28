@@ -1,0 +1,381 @@
+\documentclass{beamer}
+
+\mode<presentation> {
+}
+
+\title[]{Bayesian Clinical Trials} 
+\subtitle{Single Threshold Design Extension} 
+\date{} 
+
+\usepackage{graphicx} 
+\usepackage{booktabs} 
+\usepackage{longtable} 
+ \usepackage{hyperref}
+
+
+\usepackage{color}
+\usepackage{fancyvrb}
+
+\definecolor{shadecolor}{gray}{0.95}
+
+\DefineShortVerb[commandchars=\\\{\}]{\|}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+\hypersetup{breaklinks=true, pdfborder={0 0 0}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  
+\setcounter{secnumdepth}{0}
+%\EndDefineVerbatimEnvironment{Highlighting}
+
+
+\begin{document}
+
+
+
+\begin{frame}
+\titlepage % Print the title page as the first slide
+\end{frame}
+
+
+\begin{frame}{Single Threshold Design Extension}
+
+\begin{itemize}[<+->]
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Single Threshold Design
+\item
+  Single Threshold Design can be extended using different kinds of
+  informative prior distributions
+\item
+  Bayesian modification of the Simon's design to control frequentist
+  error rates and comparison with Tan and Machin's STD
+\item
+  a Bayesian two-stage design based on the pre-experimental control of
+  the probability of having a large posterior probability that the true
+  response rate exceeds a target value.
+\item
+  this probability is computed with respect to the prior predictive
+  distribution of the data: this design can be considered a predictive
+  version of the STD
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Two-stage design}
+
+\(n_1\) patients,
+\(\quad Y=\left\{\begin{array}{ll} 1 & \rm{responder\ to\ drug}\\ 0 & \rm{otherwise}\end{array}\right.\)
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \textbf{First stage} \[
+  s_1=\sum_{i=1}^{n_1} y_i \left\{\begin{array}{ll}\leq r_1 & \rm{experiment\ stops}\\
+  >r_1 & \rm{enrolled\ additional}\ n_2  \rm{\ patients \ for\ 2nd\ stage}\end{array}\right.
+  \]
+\end{itemize}
+
+-\textbf{Second stage} \[
+s=\sum_{i=1}^{n_1+n_2}y_i\left\{\begin{array}{ll}\leq r & \rm{experiment\ stops}\\
+    >r & \rm{drug\ candidate\ for\ phase\ III}
+\end{array}\right.
+\]
+
+\end{frame}
+
+
+
+\begin{frame}{The predictive Single Threshold Design}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  It takes the random nature of the data into account
+\item
+  the posterior probabilities that \(\theta\) exceeds \(\theta_u\) in
+  the two stages are considered random since they are functions of S1
+  and S, which are random variables
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Predictive two-stage design}
+
+\begin{itemize}
+\item
+  Given the number of respondents \(s_1\) at the end of stage 1, the
+  posterior distribution of \(\theta\) is \[
+  \pi_{n_1}(\theta \vert S_1=s_1)\propto \pi(\theta)\times{\rm Binomial}(s_1; n_1, \theta)
+  \] which is a \({\rm Beta}(\alpha+s_1, \beta+n_1-s_1)\) in the usual
+  conjugate analysis.
+\item
+  Given the total number of respondents \(s\) at the end of stage 2, the
+  posterior distribution of \(\theta\) is \[
+  \pi_n(\theta \vert S_1>r_1, S=s)\propto \pi(\theta\vert S_1>r_1)\times{\rm Binomial}(s; n, \theta)
+  \] which is still \({\rm Beta}(\alpha+s, \beta+n-s)\) in a conjugate
+  analysis.
+\end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{The single threshold design (Tan and Machin 2002)}
+
+-\textbf{Objective}: to choose the minimun sample size such that the
+posterior probability \(\theta>\theta_u\) is greater or equal to a fixed
+threshold when the response rate is equal to \(\theta_u\) + some small
+value \(\epsilon>0\)
+
+-Drug passes phase II if \(\theta> \theta_u\) (target value) if:
+
+\[\left\{\begin{array}{ll}\min n_1 & \pi_{n_1}(\theta >\theta_u \vert  S_1=(\theta_u+\epsilon)n_1)\geq\lambda_1\\
+ & \\
+\min n & \pi_n(\theta>\theta_u\vert S=(\theta_u+\epsilon)n)\geq\lambda_2
+\end{array}\right.
+\]
+
+where \(\lambda_1\) and \(\lambda_2\) are fixed probability thresholds.
+
+\end{frame}
+
+
+
+\begin{frame}{Bayesian sample size determination}
+
+Bayesian sample size determination is a form of pre-posterior analysis,
+i.e.~assessment of the value of data before they become available, in
+which the prior distribution role is twofold:
+
+\begin{itemize}
+\item
+  to obtain \(\pi(\theta\vert S)\) for posterior analysis
+\item
+  to define the marginal (predictive) distribution
+  \(m(\theta; S)=\int_{0}^{1}{\rm Binomial}(s; n, \theta)\times \pi(\theta) d\theta\)
+  for pre-posterior analysis
+\item
+  Following Wang and Gelfand 2002, the fitting or analysis prior
+  \(\pi(\cdot\vert S)\) and the sampling or design prior \(m(\cdot;S)\) do
+  not necesarily have to coincide.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Predictive version of the STD (Sambucini, 2008)}
+
+\begin{itemize}
+\item
+  The posterior probabilities that \(\theta>\theta_u\) in the two stages
+  are considered random since they are function of \(S_1\) and \(S\),
+  which are random variables
+\item
+  Determine two fixed thresholds probabilities \(\gamma_1\) and
+  \(\gamma_2\) such that
+\end{itemize}
+
+
+\begin{align}
+\mathbb{P}\left[\pi_{n_1}(\theta >\theta_u \vert S_1=(\theta_u+\epsilon)n_1)\geq\lambda_1\right]\geq\gamma_1
+\end{align}
+
+
+and
+
+\begin{align}
+\mathbb{P}\left[\pi_n(\theta>\theta_u\vert S=(\theta_u+\epsilon)n)\geq\lambda_2\right]\geq\gamma_2
+\end{align}
+
+
+where \(\mathbb{P}\) is the probability measure corresponding to the
+predictive (or marginal) distribution of the data
+
+\end{frame}
+
+
+
+
+\begin{frame}{Analysis and Design prior}
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  \textbf{Analysis prior:} embodies the effective uncertainty on
+  \(\theta\) (it is used to form the posterior distribution for making
+  inference)
+\item
+  \textbf{Design prior:} describes a scenario under which a sensible
+  sample size is established a priori according to a design criterion.
+\end{itemize}
+
+{ \textbf{Objective:}} use of a subjective prior based on elicitation of
+expert opinions for design prior.
+
+\end{frame}
+
+
+\begin{frame}{The predictie STD design \(1^{st}\) stage}
+
+Given the target response rate \(\theta_u\), consider the r.v.
+\(\pi_{n_1}(\theta > \theta_u \vert S_1)\)
+
+\begin{itemize}
+\item
+  given the probability thresholds \((\lambda_1,\gamma_1)\), select the
+  smallest sample size \(n_1^*\) such that \(\forall n_1>n_1^*\) \[
+  \mathbb{P}[\pi_{n_1}(\theta >\theta_u\vert S_1)\geq\lambda_1]\geq\gamma_1
+  \]
+\item
+  \(\mathbb{P}\) is the probability measure corresponding to the prior
+  predictive distribution of \(S_1\) induced by the design (sampling)
+  prior: \[
+  \mathbb{P}[\pi_{n_1}(\theta >\theta_u\vert S_1)\geq\lambda_1]=\sum_{s_1=\tilde{r}_1}^{n_1}m(S_1)
+  \]
+\end{itemize}
+
+where \(\tilde{r}_1\) is the smallest \(s_1\) such that
+\(\pi_{n_1}(\theta >\theta_u\vert s_1)\geq\lambda_1\).
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Once the optimal value \(n^*_1\) is selected, then
+  \(r^*_1=\tilde{r}_1-1\)
+\end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}{The predictive STD design \(2^{nd}\) stage}
+
+Given the target response rate \(\theta_u\), consider the r.v.
+\(\pi_{n_1}(\theta > \theta_u \vert S)\)
+
+\begin{itemize}
+\item
+  given the probability thresholds \((\lambda_2,\gamma_2)\), select the
+  smallest \(n*\) such that \(\forall n>n^*\) \[
+  \mathbb{P}[\pi_n(\theta >\theta_u\vert S)\geq\lambda_2]\geq\gamma_2
+  \]
+\item
+  \(\mathbb{P}\) is the probability measure corresponding to the prior
+  predictive distribution of \(S\) induced by the design (sampling)
+  prior: \[
+  \mathbb{P}[\pi_{n}(\theta >\theta_u\vert S)\geq\lambda_2]=\sum_{s=\tilde{r}}^{n}m(s\vert S_1>r^*)
+  \]
+\end{itemize}
+
+where \(\tilde{r}\) is the smallest \(s\) such that
+\(\pi_{n}(\theta >\theta_u\vert s)\geq\lambda_2\).
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Once the optimal value \(n^*\) is selected, then \(r^*=\tilde{r}-1\)
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Examples}
+
+-Using the R routines find sample size at both stages for
+\(\theta_u=0.3\) when - analysis prior is non informative
+(\(\pi_A=\theta_u-0.1\)) - design prior is an optimistic prior
+(\(\pi_D=\theta_u+0.1\)) - for \(n_D=1\) and \(n_D=10\) - under
+\(\lambda_1=0.6\), \(\gamma_1=0.6\) - under \(\lambda_2=0.8\),
+\(\gamma_2=0.9\)
+
+\end{frame}
+
+
+
+\section{Case study}\label{case-study}
+
+\begin{frame}{Illustrative example}
+
+Let's consider the phase II clinical trial conducted by Foo et al.
+{[}17{]} at the National Cancer Centre in Singapore to evaluate the
+activity of gemcitabine in patients with metastatic nasopharyngeal
+carcinoma and previously treated with chemotherapy.
+
+In a previous study, using a Simon's minimax design with
+\(\{\theta_0=0.05, \theta_u=0.2, \alpha=0.05, \beta=0.2\}\) find the
+recommended two stage sample size
+
+\end{frame}
+
+
+
+\begin{frame}{Actual data}
+
+\begin{itemize}
+\item
+  The actual data showed seven responders out of the 13 patients in the
+  first stage
+\item
+  Therefore, the trial continued to the second stage, obtaining a
+  cumulative number of 13 responders out of the total number (27
+  patients)
+\item
+  Suppose now that we are interested in planning a new two-stage study
+  to analyze the activity of gemcitabine. We can consider the data as a
+  source of prior information
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Prior information on \(\theta_u\)}
+
+\begin{itemize}
+\item
+  Since the results of this previous study show a strong efficacy of the
+  gemcitabine, in the new study we could specify a target value
+  \(\theta_u\) greater than 0.2 (the target response rate previously
+  considered)
+\item
+  The elicitation of the design prior can be based on the available
+  actual data (13 responders out of 27 patients at the end of the second
+  stage):
+
+  \begin{itemize}
+  \itemsep1pt\parskip0pt\parsep0pt
+  \item
+    prior sample size \(n_D=27\) and a observed response rate
+    \(pi_0^D=\frac{13}{27}\)
+  \item
+    using a non-informative beta distribution as analysis prior (e.g.
+    \(\pi_0^{A}=\theta_u-0.1\)
+  \end{itemize}
+\end{itemize}
+
+Under this assumptions find the recommended sample size when
+\((\lambda_1,\gamma_1, \lambda_2,\gamma_2)=(0.7,0.7,0.8,0.8)\)
+
+\end{frame}
+
+
+
+
+
+\end{document}

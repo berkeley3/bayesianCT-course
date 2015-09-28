@@ -1,0 +1,207 @@
+---
+title: "Bayesian Clinical Trials"
+subtitle: Single Threshold Design Extension  
+output:
+  ioslides_presentation:
+    css: assets/css/ioslides.css
+    logo: assets/img/logos3.png
+    mathjax: local
+    self_contained: no
+    widescreen: yes
+  beamer_presentation: default
+  slidy_presentation: default
+---
+
+## Single Threshold Design Extension
+
+>- Single Threshold Design
+>- Single Threshold Design can be extended using different kinds of informative prior distributions
+>- Bayesian modification of the Simon's design to control frequentist error rates and comparison with Tan and Machin's STD
+>- a Bayesian two-stage design based on the pre-experimental control
+of the probability of having a large posterior probability that the true response rate exceeds a
+target value.
+>- this probability is computed with respect to the prior predictive distribution of the
+data: this design can be considered a predictive version of the STD
+
+## Two-stage design
+$n_1$ patients, $\quad Y=\left\{\begin{array}{ll} 1 & \rm{responder\ to\ drug}\\ 0 & \rm{otherwise}\end{array}\right.$
+
+- __First stage__
+$$
+s_1=\sum_{i=1}^{n_1} y_i \left\{\begin{array}{ll}\leq r_1 & \rm{experiment\ stops}\\
+>r_1 & \rm{enrolled\ additional}\ n_2  \rm{\ patients \ for\ 2nd\ stage}\end{array}\right.
+$$
+
+-__Second stage__
+$$
+s=\sum_{i=1}^{n_1+n_2}y_i\left\{\begin{array}{ll}\leq r & \rm{experiment\ stops}\\
+	>r & \rm{drug\ candidate\ for\ phase\ III}
+\end{array}\right.
+$$
+
+
+## The predictive Single Threshold Design
+
+- It takes the random nature of the data into account
+- the posterior probabilities that $\theta$ exceeds $\theta_u$ in the two
+stages are considered random since they are functions of S1 and S, which are random variables
+
+
+## Predictive two-stage design
+
+- Given the number of respondents $s_1$ at the end of stage 1, the posterior distribution of $\theta$ is
+$$
+\pi_{n_1}(\theta | S_1=s_1)\propto \pi(\theta)\times{\rm Binomial}(s_1; n_1, \theta)
+$$
+which is a ${\rm Beta}(\alpha+s_1, \beta+n_1-s_1)$ in the usual conjugate analysis.
+
+- Given the total number of respondents $s$ at the end of stage 2, the posterior distribution of $\theta$ is
+$$
+\pi_n(\theta | S_1>r_1, S=s)\propto \pi(\theta|S_1>r_1)\times{\rm Binomial}(s; n, \theta)
+$$
+which is still ${\rm Beta}(\alpha+s, \beta+n-s)$ in a conjugate analysis.
+
+
+
+## The single threshold design (Tan and Machin 2002)
+-__Objective__: to choose the minimun sample size such that the posterior probability $\theta>\theta_u$ is greater or equal to a fixed threshold when the response rate is equal to $\theta_u$ + some small value $\epsilon>0$
+
+-Drug passes phase II if $\theta> \theta_u$ (target value) if:
+
+$$\left\{\begin{array}{ll}\min n_1 & \pi_{n_1}(\theta >\theta_u | S_1=(\theta_u+\epsilon)n_1)\geq\lambda_1\\
+ & \\
+\min n & \pi_n(\theta>\theta_u|S=(\theta_u+\epsilon)n)\geq\lambda_2
+\end{array}\right.
+$$
+
+where $\lambda_1$ and $\lambda_2$ are fixed probability thresholds.
+
+
+## Bayesian sample size determination
+
+Bayesian sample size determination is a form of pre-posterior analysis, i.e. assessment of 
+the value of data before they become available, in which the prior distribution role is twofold:
+
+- to obtain $\pi(\theta|S)$ for posterior analysis
+- to define the marginal (predictive) distribution $m(\theta; S)=\int_{0}^{1}{\rm Binomial}(s; n, \theta)\times \pi(\theta) d\theta$ for pre-posterior analysis
+
+
+- Following Wang and Gelfand 2002, the fitting or analysis prior $\pi(\cdot|S)$ and the sampling or design prior $m(\cdot;S)$ do not necesarily have to coincide.
+
+## Predictive version of the STD (Sambucini, 2008)
+
+- The posterior probabilities that $\theta>\theta_u$ in the two stages are considered random
+since they are function of $S_1$ and $S$, which are random variables
+
+- Determine two fixed thresholds probabilities $\gamma_1$ and $\gamma_2$ such that
+
+$$
+\begin{align}
+\mathbb{P}\left[\pi_{n_1}(\theta >\theta_u | S_1=(\theta_u+\epsilon)n_1)\geq\lambda_1\right]\geq\gamma_1
+\end{align}
+$$
+
+and
+
+$$\begin{align}
+\mathbb{P}\left[\pi_n(\theta>\theta_u|S=(\theta_u+\epsilon)n)\geq\lambda_2\right]\geq\gamma_2
+\end{align}
+$$
+
+where $\mathbb{P}$ is the probability measure corresponding to the predictive (or marginal) distribution of the data
+
+
+## Analysis and Design prior
+
+- __Analysis prior:__ embodies the effective uncertainty on $\theta$ (it is used to form the posterior distribution for making inference)
+- __Design prior:__ describes a scenario under which a sensible sample size is established a priori according to a design criterion.
+
+<span style="color:red"> __Objective:__</span> use of a subjective prior based on elicitation of expert opinions for design prior.
+
+
+##The predictie STD design $1^{st}$ stage
+Given the target response rate $\theta_u$, consider the r.v. $\pi_{n_1}(\theta > \theta_u | S_1)$
+
+- given the probability thresholds $(\lambda_1,\gamma_1)$, select the smallest sample size $n_1^*$ such that $\forall n_1>n_1^*$
+$$
+\mathbb{P}[\pi_{n_1}(\theta >\theta_u|S_1)\geq\lambda_1]\geq\gamma_1
+$$
+
+- $\mathbb{P}$ is the probability measure corresponding to the prior predictive distribution of $S_1$ induced by the design (sampling) prior:
+$$
+\mathbb{P}[\pi_{n_1}(\theta >\theta_u|S_1)\geq\lambda_1]=\sum_{s_1=\tilde{r}_1}^{n_1}m(S_1)
+$$
+
+where $\tilde{r}_1$ is the smallest $s_1$ such that $\pi_{n_1}(\theta >\theta_u|s_1)\geq\lambda_1$.
+
+- Once the optimal value $n^*_1$ is selected, then $r^*_1=\tilde{r}_1-1$
+
+
+## The predictie STD design $2^{nd}$ stage
+Given the target response rate $\theta_u$, consider the r.v. $\pi_{n_1}(\theta > \theta_u | S)$
+
+- given the probability thresholds $(\lambda_2,\gamma_2)$, select the smallest $n*$ such that $\forall n>n^*$
+$$
+\mathbb{P}[\pi_n(\theta >\theta_u|S)\geq\lambda_2]\geq\gamma_2
+$$
+
+- $\mathbb{P}$ is the probability measure corresponding to the prior predictive distribution of $S$ induced by the design (sampling) prior:
+$$
+\mathbb{P}[\pi_{n}(\theta >\theta_u|S)\geq\lambda_2]=\sum_{s=\tilde{r}}^{n}m(s|S_1>r^*)
+$$
+
+where $\tilde{r}$ is the smallest $s$ such that $\pi_{n}(\theta >\theta_u|s)\geq\lambda_2$.
+
+- Once the optimal value $n^*$ is selected, then $r^*=\tilde{r}-1$
+
+## Examples
+-Using the R routines find sample size at both stages for $\theta_u=0.3$ when
+    - analysis prior is non informative ($\pi_A=\theta_u-0.1$)
+    - design prior is an optimistic prior ($\pi_D=\theta_u+0.1$)
+    - for $nD=1$ and $n_D=10$
+    - under $\lambda_1=0.6$, $\gamma_1=0.6$
+    - under $\lambda_2=0.8$, $\gamma_2=0.9$
+
+# Case study
+
+
+## Illustrative example
+Let's consider the phase II clinical trial conducted by Foo et al. [17] at the National Cancer Centre in Singapore to evaluate the activity of gemcitabine in patients with metastatic nasopharyngeal carcinoma and previously treated with chemotherapy.
+
+In a previous study, using a Simon's minimax design with $\{\theta_0=0.05, \theta_u=0.2, \alpha=0.05, \beta=0.2\}$ find the recommended two stage sample size
+
+## Actual data
+- The actual data showed seven responders out of the 13 patients in the
+first stage 
+- Therefore, the trial continued to the second stage, obtaining a cumulative number of 13
+responders out of the total number (27 patients)
+
+
+- Suppose now that we are interested in planning a new two-stage study to analyze the activity
+of gemcitabine. We can consider the data as a source of prior information
+
+## Prior information on $\theta_u$
+- Since the results of this previous study show a strong efficacy of the gemcitabine, in the new
+study we could specify a target value $\theta_u$ greater than 0.2 (the target response rate previously considered) 
+
+- The elicitation of the design prior can be based on the available actual data (13 responders out of 27 patients at the end of the second stage):
+    + prior sample size $n_D=27$ and a observed response rate $pi_0^D=\frac{13}{27}$
+    + using a non-informative beta distribution as analysis prior (e.g. $\pi_0^A=\theta_u-0.1)
+
+Under this assumptions find the recommended sample size when $(\lamba_1,\gamma_1, \lambda_2,\gamma_2)=(0.7,0.7,0.8,0.8)$
+
+## Getting the slides
+
+* The slides for this course were created with Rmarkdown: [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/). 
+* They are available from [https://github.com/berkeley3/bayesianCT-course](https://github.com/berkeley3/bayesianCT-course).
+* To re-compile the slides:
+
+    + Download the directory containing the lecture from Github
+    + In R open the .Rmd file and set the working directory to the lecture directory
+    + Click the *KnitHTML* button on Rstudio or run the following commands: 
+  
+```{r RmarkdownChunk, eval=FALSE}
+library(rmarkdown) 
+render("index.Rmd")
+```
+

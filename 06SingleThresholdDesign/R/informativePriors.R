@@ -1,4 +1,5 @@
-pparameter=function(pi, w90, nprior=10, prior.method=c('median-informative','mean-informative','mode-informative')){
+pparameter=function(pi, w90, nprior=10, 
+                    prior.method=c('median-informative','mean-informative','mode-informative')){
   
   median.inf=function(x, pi, w90){
     y=numeric(2)
@@ -42,13 +43,3 @@ pparameter(pi=0.6, w90=0.3, prior.method='mean-informative')
 
 
 
-# med.inf=function(x, pi, w90){
-#   y=numeric(2)
-#   y[1]=pbeta(pi, x[1], x[2])-0.5
-#   y[2] = qbeta(0.95, x[1], x[2])-qbeta(0.05, x[1], x[2])-w90
-#   }
-# 
-# require(nleqslv)
-# x.start=c(1,1)
-# nleqslv(x.start, med.inf, pi=0.6, w90=0.3)
-# 
